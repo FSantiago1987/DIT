@@ -1,0 +1,79 @@
+<!-- Include Defatul HTML Header -->
+<%- include ../partials/header.ejs %>
+<!-- Include Default Html Navigation Menu -->
+<%- include ../partials/main_nav.ejs %>
+    
+<!-- Main Content -->
+  <main class="container">
+            <% if(RadialList.length == 0) { %>
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">Radial Menus</h1>
+                    <p class="lead text-muted">You don't have radial menus</p>
+                    <p>
+                        <a href="/radial-list/add" class="btn btn-primary" role="button">
+                        <i class="fas fa-plus-circle"></i> Create Radial Menu</a>
+                    </p>
+                </div>
+            </section>
+            <% } else { %>
+            <h1><%= title %></h1>
+            <a href="/radial-list/add" class="btn btn-primary" role="button">
+            <i class="fas fa-plus-circle"></i> Add a Radial Menu</a>
+            <br>
+            <!-- Repeatable Template Row -->
+            <div class="row">
+                <% for(let count = 0; count < RadialList.length; count++) { %>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="card-text"><%= RadialList[count].title %></h3> 
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                        <th scope="row">First Field</th>
+                                        <td><%= RadialList[count].firstField %></td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">Second Field</th>
+                                        <td><%= RadialList[count].secondField %></td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">Third Field</th>
+                                        <td><%= RadialList[count].thirdField %></td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">Fourth Field</th>
+                                        <td><%= RadialList[count].fourthField %></td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">Fifth Field</th>
+                                        <td><%= RadialList[count].fifthField %></td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">Sixth Field</th>
+                                        <td><%= RadialList[count].sixthField %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a href="/radial-list/edit/<%= RadialList[count]._id %>"><button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-pencil-alt"></i> Edit</button></a>
+                                            <a href="/radial-list/delete/<%= RadialList[count]._id %>"><button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-trash-alt"></i> Delete</button></a>
+                                        </div>
+                                        <small class="text-muted">9 min</small>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+            </div>
+  </main>
+
+<!-- Include Defatul HTML Bottom -->
+<%- include ../partials/bottom_nav.ejs %>
+<!-- Include Defatul Footer -->
+<%- include ../partials/footer.ejs %>

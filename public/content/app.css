@@ -1,0 +1,17 @@
+/* Custom CSS */
+footer {
+    padding-top: 80px;
+}
+
+footer h6 {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+}
+
+.hello_msg {
+    font-size: 20px !important;
+    margin-right: 10px !important;
+    color: white !important;
+    font-weight: 450 !important;
+}

@@ -1,0 +1,45 @@
+  <!-- Main Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="brand-logo right" href="/">
+      <!-- Condition Welcome Message -->
+      <% if(typeof displayName == 'string' && displayName){ %>
+        <span class="navbar-text hello_msg">Welcome, <%= displayName %></span>
+      <% } %>
+      <!-- Logo Img -->
+      <img src="/assets/images/logo.PNG" alt="dit_logo" style="height: 90px; padding: 0 auto;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>  
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger show-on-large"><i class="fas fa-bars"></i></a>
+      <ul class="sidenav" id="mobile-demo">
+        <% if(title == "Home"){ %>
+        <li class="nav-item active">
+        <% } else { %>
+        <li class="nav-item">
+        <% } %>
+          <a class="nav-link" href="/home"><i class="fas fa-lg fa-home"></i> Home</a>
+        </li>
+        <% if(title == "Radial Menus"){ %>
+          <li class="nav-item active">
+          <% } else { %>
+          <li class="nav-item">
+          <% } %>
+          <a class="nav-link" href="/radial-list"><i class="far fa-circle"></i> Radial Menus </a>
+        </li>
+        <% if(title == "Contact Us"){ %>
+          <li class="nav-item active">
+          <% } else { %>
+          <li class="nav-item">
+          <% } %>
+          <a class="nav-link" href="/contact"><i class="fas fa-lg fa-mobile-alt"></i> Contact </a>
+        </li>
+        <% if(typeof displayName == 'string' && displayName){ %>
+          <li class="nav-item"><a href="/logout" class="nav-link">
+            <i class="fas fa-lg fa-sign-out-alt"></i> Logout</a></li>
+        <% } else { %>
+          <li class="nav-item"><a href="/login" class="nav-link">
+            <i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
+        <% } %>
+    </div>
+  </nav>

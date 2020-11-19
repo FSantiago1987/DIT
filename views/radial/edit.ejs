@@ -1,0 +1,91 @@
+<!-- Include Defatul HTML Header -->
+<%- include ../partials/header.ejs %>
+<!-- Include Default Html Navigation Menu -->
+<%- include ../partials/main_nav.ejs %>
+    
+<!-- Content for the Add page -->
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <div class="form-group">
+                    <label for="titleTextField">Radial Menu Title</label>
+                    <input type="text" class="form-control"
+                    id="titleTextField"
+                    placeholder="Enter the Menu  Title"
+                    value="<%= radial.title %>"
+                    name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="firstTextField">First Text Field</label>
+                    <input type="text" class="form-control"
+                    id="firstTextField"
+                    placeholder="Enter the first Text Field"
+                    value="<%= radial.firstField %>"
+                    name="firstField" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="secondTextField">Second Text Field</label>
+                    <input type="text" class="form-control"
+                    id="secondTextField"
+                    placeholder="Enter the second Text Field"
+                    value="<%= radial.secondField %>"
+                    name="secondField" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="thirdTextField">Third Text Field</label>
+                    <input type="text" class="form-control"
+                    id="thirdTextField"
+                    placeholder="Enter the third Text Field"
+                    value="<%= radial.thirdField %>"
+                    name="thirdField" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fourthTextField">Fourth Text Field</label>
+                    <input type="text" class="form-control"
+                    id="fourthTextField"
+                    placeholder="Enter the fourth Text Field"
+                    value="<%= radial.fourthField %>"
+                    name="fourthField" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fifthTextField">Fifth Text Field</label>
+                    <input type="text" class="form-control"
+                    id="fifthTextField"
+                    placeholder="Enter the fifth Text Field"
+                    value="<%= radial.fifthField %>"
+                    name="fifthField" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="sixthTextField">Sixth Text Field</label>
+                    <input type="text" class="form-control"
+                    id="sixthTextField"
+                    placeholder="Enter the sixth Text Field"
+                    value="<%= radial.sixthField %>"
+                    name="sixthField" required>
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-edit"></i> Submit</button>
+                
+                    <a href="/book-list" class="btn btn-warning">
+                        <i class="fas fa-undo"></i> Cancel</a>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- Include Defatul HTML Bottom -->
+<%- include ../partials/bottom_nav.ejs %>
+<!-- Include Defatul Footer -->
+<%- include ../partials/footer.ejs %>
