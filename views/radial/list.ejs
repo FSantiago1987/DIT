@@ -2,6 +2,7 @@
 <%- include ../partials/header.ejs %>
 <!-- Include Default Html Navigation Menu -->
 <%- include ../partials/main_nav.ejs %>
+<script src="/scripts/app.js"></script>
     
 <!-- Main Content -->
   <main class="container">
@@ -21,8 +22,15 @@
             <a href="/radial-list/add" class="btn btn-primary" role="button">
             <i class="fas fa-plus-circle"></i> Add a Radial Menu</a>
             <br>
+            <!-- Search box for titles -->
+            
+                <div class="autocomplete" style="width:300px;">
+                    <input id="searchTitle" type="text" name="title" placeholder="Titles">
+                </div>
+                <button onclick="findTitle()" class="btn btn-sm btn-outline-secondary">Search</button>
+            
             <!-- Repeatable Template Row -->
-            <div class="row">
+            <div class="row" id="menusDiv">
                 <% for(let count = 0; count < RadialList.length; count++) { %>
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
@@ -71,6 +79,15 @@
                 <% } %>
             <% } %>
             </div>
+            <script>
+                let menusDiv = document.getElementById("menusDiv");
+                let menusDivClass = menusDiv.getElementsByClassName("card-text");
+                let titles = [];
+                for(let i = 0; i < menusDivClass.length; i++) {
+                    titles.push(menusDivClass[i].innerHTML)
+                }
+                autocomplete(document.getElementById("searchTitle"), titles);
+            </script>
   </main>
 
 <!-- Include Defatul HTML Bottom -->
