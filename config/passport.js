@@ -4,11 +4,20 @@ let mongoose = require('mongoose');
 let {user} = require('passport');
 
 let GoogleUser = require('../models/googleUser');
+<<<<<<< HEAD
 
 module.exports = function(passport) {
     passport.use(new GoogleStrategy({
         clientID: '353588157874-sc446hq0164cusbfbigjl6mg4c8174sb.apps.googleusercontent.com',
         clientSecret: 'czVaxP41COg_lwz4HFr7doIT',
+=======
+let DB = require('./db');
+
+module.exports = function(passport) {
+    passport.use(new GoogleStrategy({
+        clientID: DB.GOOGLE_ID,
+        clientSecret: DB.GOOGLE_SECRET,
+>>>>>>> 006acd4... added mongodb atlas connection
         callbackURL: '/auth/google/callback'        
     }, async (accessToken, refreshToken, profile, done) => {
         let newUser = {

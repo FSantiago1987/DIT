@@ -13,13 +13,13 @@ module.exports.displayRadialList = (req, res, next) => {
         }
         else
         {
-            res.render('radial/list', {title: 'Radial Menus', RadialList: radialList});
+            res.render('radial/list', {title: 'Radial Menus', RadialList: radialList, displayName: req.user ? req.user.displayName: ''});
         }
     });
 }
 
 module.exports.displayAddPage = (req, res, next) => {
-    res.render('radial/add', {title: 'Add Radial Menu'})          
+    res.render('radial/add', {title: 'Add Radial Menu', displayName: req.user ? req.user.displayName: ''})          
 }
 
 module.exports.processAddPage = (req, res, next) => {
@@ -60,7 +60,7 @@ module.exports.displayEditPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('radial/edit', {title: 'Edit Radial', radial: radialToEdit})
+            res.render('radial/edit', {title: 'Edit Radial', radial: radialToEdit, displayName: req.user ? req.user.displayName: ''})
         }
     });
 }
