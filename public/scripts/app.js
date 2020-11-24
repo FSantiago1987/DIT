@@ -117,9 +117,12 @@ function autocomplete(inp, arr) {
     let menusDivClass = menusDiv.getElementsByClassName("card-text");
     
     for(let i = 0; i < menusDivClass.length; i++) {
+      cardDiv[i].style.display = "block";
+    }
+    
+    for(let i = 0; i < menusDivClass.length; i++) {
       if(searchingWord != menusDivClass[i].innerHTML) {
-        cardDiv[i].remove();
-        i = -1;
+        cardDiv[i].style.display = "none";
       }
     }
   }
