@@ -1,11 +1,39 @@
-  <!-- Main Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="brand-logo right">
+<!-- set active item on navigation bar based on the current page -->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a  href="/home"><i class="fas fa-home"></i> Home</a>
+    <a class="nav-link" href="/radial-list"><i class="far fa-circle"></i> Radial Menus </a>
+    <a class="nav-link" href="/contact"><i class="fas fa-lg fa-mobile-alt"></i> Contact </a>
+    <% if(typeof displayName == 'string' && displayName){ %>
+        <a href="/logout"><i class="fas fa-lg fa-sign-out-alt"></i> Logout</a></li>
+    <% } else { %>
+        <a href="/login" class="nav-link"><i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
+    <% } %>
+</div>
+
+<!-- Main navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div>
+        <span style="font-size:26px;cursor:pointer;color:white" onclick="openNav()">&#9776; Menu</span>
+    </div>
+    <div class="brand-logo ml-auto">
       <!-- Condition Welcome Message -->
       <% if(typeof displayName == 'string' && displayName){ %>
         <span class="navbar-text hello_msg">Welcome, <%= displayName %></span>
       <% } %>
       <!-- Logo Img -->
+      <a href="/"><img src="/assets/images/logo.PNG" alt="dit_logo" style="height: 90px; padding: 0 auto;"></a>
+    </div>
+</nav>
+
+  <!-- Main Navigation
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="brand-logo right">
+       Condition Welcome Message
+      <% if(typeof displayName == 'string' && displayName){ %>
+        <span class="navbar-text hello_msg">Welcome, <%= displayName %></span>
+      <% } %>
+      Logo Img
       <a href="/"><img src="/assets/images/logo.PNG" alt="dit_logo" style="height: 90px; padding: 0 auto;"></a>
     </div>
     <a href="#" data-target="mobile-demo" class="sidenav-trigger show-on-large"><i class="fas fa-bars"></i></a>
@@ -38,4 +66,5 @@
           <li class="nav-item"><a href="/login" class="nav-link">
             <i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
         <% } %>
-  </nav>
+  </nav> 
+  -->
