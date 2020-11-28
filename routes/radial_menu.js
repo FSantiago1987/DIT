@@ -7,22 +7,24 @@ let Radial = require('../models/radial_menu');
 
 let radialController = require('../controllers/radial_menu');
 
+let authRequired = require('../config/auth');
+
 /* GET Route for the Radial List page - READ Operation */
-router.get('/',  radialController.displayRadialList);
+router.get('/', authRequired, radialController.displayRadialList);
 
 /* GET Route for displaying the Add page - CREATE Operation */
-router.get('/add', radialController.displayAddPage);
+router.get('/add', authRequired, radialController.displayAddPage);
 
 /* POST Route for processing the Add page - CREATE Operation */
-router.post('/add', radialController.processAddPage);
+router.post('/add', authRequired, radialController.processAddPage);
 
 /* GET Route for displaying the Edit page - UPDATE Operation */
-router.get('/edit/:id', radialController.displayEditPage);
+router.get('/edit/:id', authRequired, radialController.displayEditPage);
 
 /* POST Route for processing the Edit page - UPDATE Operation */
-router.post('/edit/:id', radialController.processEditPage);
+router.post('/edit/:id', authRequired, radialController.processEditPage);
 
 /* GET to perform  Deletion - DELETE Operation */
-router.get('/delete/:id', radialController.performDelete);
+router.get('/delete/:id', authRequired, radialController.performDelete);
 
 module.exports = router;
