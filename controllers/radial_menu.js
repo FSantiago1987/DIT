@@ -5,8 +5,24 @@ let mongoose = require('mongoose');
 // create a reference to the model
 let Radial = require('../models/radial_menu');
 
-module.exports.displayRadialList = (req, res, next) => {
-    Radial.find((err, radialList) => {
+module.exports.displayRadialList = async (req, res, next) => {
+    try 
+    {
+        let userID = req.user._id;
+        let radialList = await Radial.find()
+        .populate('users')
+        .lean()
+
+        res.render('radial/list', {
+            title: 'Radial Menus', 
+            RadialList: radialList,
+            UserID: userID.toString(), 
+            displayName: req.user ? req.user.displayName: ''
+        });
+    } catch (err) {
+        return console.error(err);
+    }
+    /*Radial.find((err, radialList) => {
         if(err)
         {
             return console.error(err);
@@ -15,15 +31,24 @@ module.exports.displayRadialList = (req, res, next) => {
         {
             res.render('radial/list', {title: 'Radial Menus', RadialList: radialList, displayName: req.user ? req.user.displayName: ''});
         }
-    });
+    });*/
 }
 
 module.exports.displayAddPage = (req, res, next) => {
     res.render('radial/add', {title: 'Add Radial Menu', displayName: req.user ? req.user.displayName: ''})          
 }
 
-module.exports.processAddPage = (req, res, next) => {
-    let newRadial = Radial({
+module.exports.processAddPage = async (req, res, next) => {
+    try {
+        req.body.user = req.user.id;
+        await Radial.create(req.body);
+        res.redirect('/radial-list');
+    } catch (err) {
+        console.log(err);
+        res.end(err);
+    }   
+
+    /*let newRadial = Radial({
         "title": req.body.title,
         "firstField": req.body.firstField,
         "secondField": req.body.secondField,
@@ -44,7 +69,7 @@ module.exports.processAddPage = (req, res, next) => {
             // refresh the book list
             res.redirect('/radial-list');
         }
-    });
+    });*/
 
 }
 
@@ -65,12 +90,13 @@ module.exports.displayEditPage = (req, res, next) => {
     });
 }
 
-module.exports.processEditPage = (req, res, next) => {
+module.exports.processEditPage = async (req, res, next) => {
     let id = req.params.id
-
     let updatedRadial = Radial({
         "_id": id,
         "title": req.body.title,
+        "status": req.body.privacy,
+        "user": req.body.user,
         "firstField": req.body.firstField,
         "secondField": req.body.secondField,
         "thirdField": req.body.thirdField,
@@ -79,14 +105,15 @@ module.exports.processEditPage = (req, res, next) => {
         "sixthField": req.body.sixthField
     });
 
-    Radial.updateOne({_id: id}, updatedRadial, (err) => {
+    radial = Radial.findOneAndUpdate({_id: id}, updatedRadial, (err) => {
         if(err)
         {
             console.log(err);
             res.end(err);
         }
         else
-        {
+        {   
+            console.log(req.body);
             // refresh the book list
             res.redirect('/radial-list');
         }
