@@ -107,12 +107,12 @@ padding: 0 18px;
 border-radius: 10px;
 }
 
-.model-content-incident {
-background-color: darksalmon;
+.model-content-add {
+background-color: darkslategray;
 }
 
 .model-content-update {
-background-color: darkslategray;
+background-color: #13445e;
 }
 
 
@@ -152,7 +152,20 @@ color: gray;
 }
 
 
-.loginButton, .registerButton, .addButton {
+.fonticonUpdate
+{ 
+position: relative; 
+} 
+
+.fonticonUpdate i {
+position: absolute; 
+left: 15px; 
+top: 50px; 
+color: gray; 
+}
+
+/* Styling Buttons */
+.loginButton, .registerButton, .addButton, .submitButton {
   background-color: #1c6288;
   font-size: 19px;
   border-radius: 5px;
@@ -176,7 +189,7 @@ color: gray;
   border: 1px solid #daf1ff;
   }
   
-  .loginButton:hover, .registerButton:hover, .addButton:hover {
+  .loginButton:hover, .registerButton:hover, .addButton:hover, .submitButton:hover {
   background-color: #13445e;
   border: 1px solid #daf1ff;
   }
@@ -189,6 +202,20 @@ color: gray;
   .googleButton:hover {
   border: 1px solid #daf1ff;
   }
+
+/* Styling Lables */
+
+.labelList {
+  font-size: 25px;
+  color: antiquewhite;
+  text-align: left;
+}
+
+.selectList {
+  letter-spacing: 2px;
+  font-size: 18px;
+  padding-left: 54px;
+}
   
   .forgot {
   padding: 5px 0 25px;
