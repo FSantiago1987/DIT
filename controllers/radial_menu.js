@@ -41,6 +41,7 @@ module.exports.displayAddPage = (req, res, next) => {
 module.exports.processAddPage = async (req, res, next) => {
     try {
         req.body.user = req.user.id;
+        console.log(req.body);
         await Radial.create(req.body);
         res.redirect('/radial-list');
     } catch (err) {
