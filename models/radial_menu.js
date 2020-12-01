@@ -12,12 +12,15 @@ let radialModel = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     },
+    /*
     firstField: String,
     secondField: String,
     thirdField: String,
     fourthField: String,
     fifthField: String,
     sixthField: String
+    */
+    fields: []
 },
 {
     collection: "radial_menus"

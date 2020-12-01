@@ -32,49 +32,35 @@
     <!-- Repeatable Template Row -->
     <div class="row" id="menusDiv">
         <% for(let count = 0; count < RadialList.length; count++) { %>
+        <% btnId = count; %>
         <% if(RadialList[count].user == UserID || RadialList[count].status == 'public') { %>
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
                     <h3 class="card-text"><%= RadialList[count].title %></h3>
-                    <table class="table table-borderless">
+                    <table class="table table-borderless" id="table<%= btnId %>">
                         <tbody>
-                            <tr>
-                                <th scope="row">First Field</th>
-                                <td><%= RadialList[count].firstField %></td>
+                        <% for(let countFields = 0; countFields < RadialList[count].fields.length; countFields++) { %>
+                            <tr class="rowTable">
+                                <th scope="row">Field N<%= countFields + 1 %></th>
+                                <td><%= RadialList[count].fields[countFields] %></td>
                             </tr>
-                            <tr>
-                                <th scope="row">Second Field</th>
-                                <td><%= RadialList[count].secondField %></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Third Field</th>
-                                <td><%= RadialList[count].thirdField %></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Fourth Field</th>
-                                <td><%= RadialList[count].fourthField %></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Fifth Field</th>
-                                <td><%= RadialList[count].fifthField %></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Sixth Field</th>
-                                <td><%= RadialList[count].sixthField %></td>
-                            </tr>
+                        <% } %>
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
+                            <button type="button" id="previous<%= btnId %>" class="PreviousBtn btn btn-sm btn-outline-primary" onclick="previous_click(this.id)" >
+                                <i class="fas fa-arrow-left"></i> Previous</button>
                             <a href="/radial-list/edit/<%= RadialList[count]._id %>"><button type="button"
                                     class="btn btn-sm btn-outline-primary">
                                     <i class="fas fa-pencil-alt"></i> Edit</button></a>
                             <a href="/radial-list/delete/<%= RadialList[count]._id %>"><button type="button"
                                     class="btn btn-sm btn-outline-danger">
                                     <i class="fas fa-trash-alt"></i> Delete</button></a>
+                            <button type="button" id="next<%= btnId %>" class="nextBtn btn btn-sm btn-outline-primary" onclick="next_click(this.id)">
+                                <i class="fas fa-arrow-right"></i> Next</button>
                         </div>
-                        <small class="text-muted">9 min</small>
                     </div>
                 </div>
             </div>

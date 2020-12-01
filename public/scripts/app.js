@@ -138,3 +138,62 @@ function closeNav() {
     document.getElementById("main").style.marginLeft= "0";
     document.body.style.backgroundColor = "white";
 }
+
+// display list page six field onlu
+$(function(){
+  if($("div").is('#menusDiv')){
+    let tables = document.getElementsByClassName('table-borderless');
+    for(let i = 0; i < tables.length; i++) {
+      let innerTr = tables[i].getElementsByTagName("TR");
+      for(let a = 6; a < innerTr.length; a++) {
+        innerTr[a].style.display = "none";
+      }
+    }
+  }
+});
+
+function next_click(clicked_id) {
+  let nonFields = 0;
+  let tFields = 0;
+  let nonFieldsCount = 0
+  let table = document.getElementById("table" + clicked_id.substr(4));
+  let innerTr = table.getElementsByTagName("TR");
+  for(let i = 0; i < innerTr.length; i++ ) {
+    if(innerTr[i].style.display != "none" && (innerTr.length - nonFieldsCount > 6)) {
+      nonFields += 1;
+      innerTr[i].style.display = "none";
+    }
+    else if(nonFields > 5) {
+      tFields += 1;
+      if(tFields <= 6) {
+        innerTr[i].style.display = "table-row";
+      }
+    }
+    else {
+      nonFieldsCount += 1;
+    }
+  }
+}
+
+function previous_click(clicked_id) {
+  let nonFields = 0;
+  let tFields = 0;
+  let nonFieldsCount = 0
+  let table = document.getElementById("table" + clicked_id.substr(8));
+  let innerTr = table.getElementsByTagName("TR");
+  for(let i = innerTr.length; i--;){
+    if(innerTr[i].style.display != "none" && (innerTr.length - nonFieldsCount > 6)) {
+      nonFields += 1;
+      innerTr[i].style.display = "none";
+    }
+    else if(nonFields >= 1) {
+      tFields += 1;
+      if(tFields <= 6) {
+        innerTr[i].style.display = "table-row";
+      }
+    }
+    else {
+      nonFieldsCount += 1;
+    }
+  }
+}

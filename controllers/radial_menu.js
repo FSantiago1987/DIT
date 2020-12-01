@@ -22,16 +22,6 @@ module.exports.displayRadialList = async (req, res, next) => {
     } catch (err) {
         return console.error(err);
     }
-    /*Radial.find((err, radialList) => {
-        if(err)
-        {
-            return console.error(err);
-        }
-        else
-        {
-            res.render('radial/list', {title: 'Radial Menus', RadialList: radialList, displayName: req.user ? req.user.displayName: ''});
-        }
-    });*/
 }
 
 module.exports.displayAddPage = (req, res, next) => {
@@ -47,30 +37,6 @@ module.exports.processAddPage = async (req, res, next) => {
         console.log(err);
         res.end(err);
     }   
-
-    /*let newRadial = Radial({
-        "title": req.body.title,
-        "firstField": req.body.firstField,
-        "secondField": req.body.secondField,
-        "thirdField": req.body.thirdField,
-        "fourthField": req.body.fourthField,
-        "fifthField": req.body.fifthField,
-        "sixthField": req.body.sixthField
-    });
-
-    Radial.create(newRadial, (err, Radial) =>{
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            // refresh the book list
-            res.redirect('/radial-list');
-        }
-    });*/
-
 }
 
 module.exports.displayEditPage = (req, res, next) => {
@@ -97,12 +63,7 @@ module.exports.processEditPage = async (req, res, next) => {
         "title": req.body.title,
         "status": req.body.privacy,
         "user": req.body.user,
-        "firstField": req.body.firstField,
-        "secondField": req.body.secondField,
-        "thirdField": req.body.thirdField,
-        "fourthField": req.body.fourthField,
-        "fifthField": req.body.fifthField,
-        "sixthField": req.body.sixthField
+        "fields":req.body.fields
     });
 
     radial = Radial.findOneAndUpdate({_id: id}, updatedRadial, (err) => {

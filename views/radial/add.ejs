@@ -14,7 +14,7 @@
                 <img src="/assets/images/add.png">
             </div>
             <div class="col-12 form-input">
-                <form method="POST" autocomplete="off">
+                <form method="POST" autocomplete="off" id="addForm">
                     <div class="form-group fonticonUpdate">
                         <i class="fab fa-elementor fa-lg"></i>
                         <label for="titleTextField" class="labelList">Radial Menu Title</label>
@@ -35,46 +35,48 @@
                         <i class="fas fa-comment fa-lg"></i>
                         <label for="firstTextField" class="labelList">First Text Field</label>
                         <input type="text" class="form-control" id="firstTextField"
-                            placeholder="Enter the first Text Field" name="firstField" required>
+                            placeholder="Enter the first Text Field" name="fields" required>
                     </div>
 
                     <div class="form-group fonticonUpdate">
                         <i class="fas fa-comment fa-lg"></i>
                         <label for="secondTextField" class="labelList">Second Text Field</label>
                         <input type="text" class="form-control" id="secondTextField"
-                            placeholder="Enter the second Text Field" name="secondField" required>
+                            placeholder="Enter the second Text Field" name="fields" required>
                     </div>
 
                     <div class="form-group fonticonUpdate">
                         <i class="fas fa-comment fa-lg"></i>
                         <label for="thirdTextField" class="labelList">Third Text Field</label>
                         <input type="text" class="form-control" id="thirdTextField"
-                            placeholder="Enter the third Text Field" name="thirdField" required>
+                            placeholder="Enter the third Text Field" name="fields" required>
                     </div>
 
                     <div class="form-group fonticonUpdate">
                         <i class="fas fa-comment fa-lg"></i>
                         <label for="fourthTextField" class="labelList">Fourth Text Field</label>
                         <input type="text" class="form-control" id="fourthTextField"
-                            placeholder="Enter the fourth Text Field" name="fourthField" required>
+                            placeholder="Enter the fourth Text Field" name="fields" required>
                     </div>
 
                     <div class="form-group fonticonUpdate">
                         <i class="fas fa-comment fa-lg"></i>
                         <label for="fifthTextField" class="labelList">Fifth Text Field</label>
-                        <input type="text" class="form-control" id="fifthTextField"
-                            placeholder="Enter the fifth Text Field" name="fifthField" required>
+                        <input type="text" class="form-control" id="fourthTextField"
+                            placeholder="Enter the fifth Text Field" name="fields" required>
                     </div>
 
                     <div class="form-group fonticonUpdate">
                         <i class="fas fa-comment fa-lg"></i>
                         <label for="sixthTextField" class="labelList">Sixth Text Field</label>
-                        <input type="text" class="form-control" id="sixthTextField"
-                            placeholder="Enter the sixth Text Field" name="sixthField" required>
+                        <input type="text" class="form-control" id="fourthTextField"
+                            placeholder="Enter the Sixth Text Field" name="fields" required>
                     </div>
 
-                    <button class="btn btn-primary submitButton" type="submit">
+                    <button class="btn btn-primary submitButton" type="submit" id="submitBtn">
                         <i class="fas fa-edit"></i> Submit</button>
+
+                    <button class="btn btn-success submitButton" onclick="myFunction()" type="button">Add element</button>
 
                     <a href="/radial-list" class="btn btn-warning cancelButton">
                         <i class="fas fa-undo"></i> Cancel</a>
@@ -85,6 +87,32 @@
         </div>
     </div>
 </div>
+<script>
+    function myFunction() {
+        let form = document.getElementById("addForm");
+        let submutBtn = document.querySelector("#submitBtn");
+
+        let fieldDiv = document.createElement("div");
+        fieldDiv.classList.add("form-group", "fonticonUpdate");
+        form.appendChild(fieldDiv);
+
+        submutBtn.before(fieldDiv);
+
+        let i = document.createElement("i");
+        i.classList.add("fas", "fa-comment", "fa-lg");
+        fieldDiv.appendChild(i);
+
+        let label = document.createElement("label");
+        label.classList.add("labelList");
+        label.innerHTML = "Another Field";
+        fieldDiv.appendChild(label);
+
+        let input = document.createElement("input");
+        input.classList.add("form-control");
+        input.name = "fields";
+        fieldDiv.appendChild(input);
+    }
+</script>
     <!-- Include Defatul HTML Bottom -->
     <%- include ../partials/bottom_nav.ejs %>
     <!-- Include Defatul Footer -->
