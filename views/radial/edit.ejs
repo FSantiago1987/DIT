@@ -26,8 +26,16 @@
                         <label for="privacy" class="labelList">Radial Privacy</label>
                         <i class="fas fa-user-secret fa-lg"></i>
                         <select class="form-control mdb-select md-form selectList" id="privacy" name="privacy" required>
-                            <option value="public" selected>Public</option>
-                            <option value="Private">Private</option>
+                            <% if (radial.privacy == "Public") { %>
+                                <option value="Public" selected>Public</option>
+                            <% } else { %>
+                                <option value="Public">Public</option>
+                            <% } %>
+                            <% if (radial.privacy == "Private") { %>
+                                <option value="Private" selected>Private</option>
+                            <% } else { %>
+                                <option value="Private">Private</option>
+                            <% } %>
                         </select>
                     </div>                    
 

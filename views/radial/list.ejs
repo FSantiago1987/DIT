@@ -32,8 +32,12 @@
     <!-- Repeatable Template Row -->
     <div class="row" id="menusDiv">
         <% for(let count = 0; count < RadialList.length; count++) { %>
+<<<<<<< HEAD
         <% btnId = count; %>
         <% if(RadialList[count].user == UserID || RadialList[count].status == 'public') { %>
+=======
+        <% if(RadialList[count].user == UserID || RadialList[count].privacy == 'Public') { %>
+>>>>>>> af53ed6cc9fff6296443ebd02b13bc35e4c93da0
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">

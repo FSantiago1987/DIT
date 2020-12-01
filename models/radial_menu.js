@@ -3,10 +3,10 @@ let mongoose = require('mongoose');
 // create a model class
 let radialModel = mongoose.Schema({
     title: String,
-    status: {
+    privacy: {
         type: String,
-        default: 'public',
-        enum: ['public', 'private']
+        default: 'Public',
+        enum: ['Public', 'Private']
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
