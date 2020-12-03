@@ -197,3 +197,40 @@ function previous_click(clicked_id) {
     }
   }
 }
+
+
+function addElements() {
+  let form = document.getElementById("addForm");
+  let submutBtn = document.querySelector("#submitBtn");
+  let innerTr = document.getElementsByTagName("input");
+
+  let fieldDiv = document.createElement("div");
+  fieldDiv.classList.add("form-group", "fonticonUpdate");
+  form.appendChild(fieldDiv);
+
+  submutBtn.before(fieldDiv);
+
+  let i = document.createElement("i");
+  i.classList.add("fas", "fa-comment", "fa-lg");
+  fieldDiv.appendChild(i);
+
+  let label = document.createElement("label");
+  label.classList.add("labelList");
+  label.innerHTML = stringifyNumber(innerTr.length) +" Text Field";
+  fieldDiv.appendChild(label);
+
+  let input = document.createElement("input");
+  input.classList.add("form-control");
+  input.name = "fields";
+  input.placeholder = "Enter the " + stringifyNumber(innerTr.length)  + " Text Field";
+  fieldDiv.appendChild(input);
+}
+
+var special = ['zeroth','First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth'];
+var deca = ['Twent', 'Thirt', 'Fort', 'Fift', 'Sixt', 'Sevent', 'Eight', 'Ninet'];
+
+function stringifyNumber(n) {
+if (n < 20) return special[n];
+if (n%10 === 0) return deca[Math.floor(n/10)-2] + 'ieth';
+return deca[Math.floor(n/10)-2] + 'y-' + special[n%10];
+}

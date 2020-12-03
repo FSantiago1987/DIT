@@ -30,7 +30,14 @@ let User = mongoose.Schema
             type: String,
             default: '',
             trim: true,
-            required: 'Display Name address is required'
+            required: 'Display Name is required'
+        },
+        role: {
+            type: String,
+            default: 'User',
+            enum: ['User', 'Caretaker'],
+            trim: true,
+            required: 'Role is required'
         },
         created:
         {

@@ -73,10 +73,12 @@
                             placeholder="Enter the Sixth Text Field" name="fields" required>
                     </div>
 
-                    <button class="btn btn-primary submitButton" type="submit" id="submitBtn">
+                    <button class="btn btn-success addElementButton" onclick="addElements()" type="button" id="submitBtn">Add element</button>
+                    <div class="divider"></div>
+                    <button class="btn btn-primary submitButton" type="submit">
                         <i class="fas fa-edit"></i> Submit</button>
 
-                    <button class="btn btn-success submitButton" onclick="myFunction()" type="button">Add element</button>
+                    
 
                     <a href="/radial-list" class="btn btn-warning cancelButton">
                         <i class="fas fa-undo"></i> Cancel</a>
@@ -87,32 +89,7 @@
         </div>
     </div>
 </div>
-<script>
-    function myFunction() {
-        let form = document.getElementById("addForm");
-        let submutBtn = document.querySelector("#submitBtn");
 
-        let fieldDiv = document.createElement("div");
-        fieldDiv.classList.add("form-group", "fonticonUpdate");
-        form.appendChild(fieldDiv);
-
-        submutBtn.before(fieldDiv);
-
-        let i = document.createElement("i");
-        i.classList.add("fas", "fa-comment", "fa-lg");
-        fieldDiv.appendChild(i);
-
-        let label = document.createElement("label");
-        label.classList.add("labelList");
-        label.innerHTML = "Another Field";
-        fieldDiv.appendChild(label);
-
-        let input = document.createElement("input");
-        input.classList.add("form-control");
-        input.name = "fields";
-        fieldDiv.appendChild(input);
-    }
-</script>
     <!-- Include Defatul HTML Bottom -->
     <%- include ../partials/bottom_nav.ejs %>
     <!-- Include Defatul Footer -->
