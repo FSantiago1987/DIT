@@ -173,6 +173,15 @@ color: gray;
   border: 1px solid #daf1ff;
   margin-bottom: 20px;
   }
+
+  .addElementButton {
+    background-color: coral;
+    font-size: 19px;
+    border-radius: 5px;
+    padding: 7px 14px;
+    border: 1px solid #daf1ff;
+    margin-bottom: 20px;
+  }
   
   .cancelButton {
   font-size: 19px;
@@ -201,6 +210,11 @@ color: gray;
   
   .googleButton:hover {
   border: 1px solid #daf1ff;
+  }
+
+  .addElementButton:hover {
+    background-color: darkgoldenrod;
+    border: 1px solid #daf1ff;
   }
 
 /* Styling Lables */

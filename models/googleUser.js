@@ -21,6 +21,13 @@ let GoogleUser = new mongoose.Schema
             type: String,
             required: true
         },
+        role: {
+            type: String,
+            default: 'User',
+            enum: ['User', 'Caretaker'],
+            trim: true,
+            required: 'Role is required'
+        },
         created:
         {
             type: Date,
