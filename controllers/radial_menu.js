@@ -9,14 +9,18 @@ module.exports.displayRadialList = async (req, res, next) => {
     try 
     {
         let userID = req.user._id;
+        let role = req.user.role;
         let radialList = await Radial.find()
         .populate('users')
         .lean()
+
+        console.log(radialList[1].user);
 
         res.render('radial/list', {
             title: 'Radial Menus', 
             RadialList: radialList,
             UserID: userID.toString(), 
+            Role: role,
             displayName: req.user ? req.user.displayName: ''
         });
     } catch (err) {
@@ -62,7 +66,7 @@ module.exports.processEditPage = async (req, res, next) => {
     let updatedRadial = Radial({
         "_id": id,
         "title": req.body.title,
-        "status": req.body.privacy,
+        "privacy": req.body.privacy,
         "user": req.body.user,
         "fields":req.body.fields
     });

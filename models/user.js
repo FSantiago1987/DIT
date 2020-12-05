@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 let passportLocalMongoose = require('passport-local-mongoose');
 
+
 let User = mongoose.Schema
 (
     {
@@ -35,7 +36,7 @@ let User = mongoose.Schema
         role: {
             type: String,
             default: 'User',
-            enum: ['User', 'Caretaker'],
+            enum: ['User', 'Caregiver'],
             trim: true,
             required: 'Role is required'
         },
