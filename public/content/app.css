@@ -107,6 +107,10 @@ padding: 0 18px;
 border-radius: 10px;
 }
 
+.displayInfo {
+  min-width: 600px;
+}
+
 .model-content-add {
 background-color: darkslategray;
 }
@@ -137,6 +141,21 @@ border: 0;
 font-size: 18px;
 letter-spacing: 2px;
 padding-left: 54px;
+}
+
+.textArea {
+  background-color: #d4d4d4;
+  text-align: justify;
+  text-justify: inter-word; 
+  border-radius: 5px;
+  border: 0;
+  font-size: 18px;
+  letter-spacing: 2px; 
+  padding-left: 54px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  height: 200px!important;
 }
 
 .fonticon

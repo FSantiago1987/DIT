@@ -24,6 +24,13 @@ router.get('/edit/:id', authRequired, radialController.displayEditPage);
 /* POST Route for processing the Edit page - UPDATE Operation */
 router.post('/edit/:id', authRequired, radialController.processEditPage);
 
+/* GET Route for displaying the View Content - UPDATE Operation */
+router.get('/content/:id/:number', authRequired, radialController.displayContentPage);
+
+/* POST Route for processing Text Speech  */
+router.post('/content/:id/:number', authRequired, radialController.processContentPage);
+
+
 /* GET to perform  Deletion - DELETE Operation */
 router.get('/delete/:id', authRequired, radialController.performDelete);
 

@@ -20,7 +20,8 @@ let radialModel = mongoose.Schema({
     fifthField: String,
     sixthField: String
     */
-    fields: []
+    fields: [],
+    titleFields: []
 },
 {
     collection: "radial_menus"
