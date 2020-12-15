@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
+let say = require('say');
 
 // create a reference to the model
 let Radial = require('../models/radial_menu');
@@ -14,7 +15,6 @@ module.exports.displayRadialList = async (req, res, next) => {
         .populate('users')
         .lean()
 
-        console.log(radialList[1].user);
 
         res.render('radial/list', {
             title: 'Radial Menus', 
@@ -68,7 +68,8 @@ module.exports.processEditPage = async (req, res, next) => {
         "title": req.body.title,
         "privacy": req.body.privacy,
         "user": req.body.user,
-        "fields":req.body.fields
+        "fields":req.body.fields,
+        "titleFields": req.body.titleFields
     });
 
     radial = Radial.findOneAndUpdate({_id: id}, updatedRadial, (err) => {
@@ -102,3 +103,27 @@ module.exports.performDelete = (req, res, next) => {
         }
     });
 }
+
+module.exports.displayContentPage = (req, res, next) => {
+    let id = req.params.id;
+    let number = parseInt(req.params.number);
+
+    Radial.findById(id, (err, radialToDisplay) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            //show the edit view
+            res.render('radial/content', {title: 'Cotent Radial', radial: radialToDisplay, Number: number, displayName: req.user ? req.user.displayName: ''})
+        }
+    });
+}
+
+module.exports.processContentPage = (req, res) => {
+    let str = req.body.fields;
+    say.speak(str);
+}
+
