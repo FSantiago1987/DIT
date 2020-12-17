@@ -27,4 +27,7 @@ router.post('/edit/:id', authRequired, radialController.processEditPage);
 /* GET to perform  Deletion - DELETE Operation */
 router.get('/delete/:id', authRequired, radialController.performDelete);
 
+/* GET Route for the Radial List page - READ Operation */
+router.get('/category/:category', authRequired, radialController.displayCategory);
+
 module.exports = router;

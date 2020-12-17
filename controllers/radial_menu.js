@@ -35,8 +35,23 @@ module.exports.displayAddPage = (req, res, next) => {
 module.exports.processAddPage = async (req, res, next) => {
     try {
         req.body.user = req.user.id;
-        console.log(req.body);
-        await Radial.create(req.body);
+        let fieldsArr = req.body.field;
+        let newRadial = await Radial.create(req.body);
+        for(let i = 0; i < fieldsArr.length; i++) {
+            Radial.update({_id: newRadial._id},
+                { 
+                    $push: {
+                        fields: [{
+                            "text": fieldsArr[i]
+                        }] 
+                    }
+                }, (err) => {
+                    if(err) {
+                        console.log(err);
+                    }
+                });
+        }
+
         res.redirect('/radial-list');
     } catch (err) {
         console.log(err);
@@ -101,4 +116,30 @@ module.exports.performDelete = (req, res, next) => {
              res.redirect('/radial-list');
         }
     });
+}
+
+module.exports.displayCategory = async (req, res, next) => {
+    let category = req.params.category;
+    
+    try 
+    {
+        let userID = req.user._id;
+        let role = req.user.role;
+        let radialList = await Radial.find()
+        .populate('users')
+        .lean()
+
+        console.log(radialList[1].user);
+
+        res.render('radial/category', {
+            title: 'Radial Menus',
+            category: category,
+            RadialList: radialList,
+            UserID: userID.toString(), 
+            Role: role,
+            displayName: req.user ? req.user.displayName: ''
+        });
+    } catch (err) {
+        return console.error(err);
+    }
 }

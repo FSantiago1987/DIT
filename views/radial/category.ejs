@@ -5,14 +5,47 @@
 <script src="/scripts/app.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%">
-  <h3 class="w3-bar-item">Category</h3>
-  <ul class="list-group" id="category-list">
-        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
+<% if(category == 'family') { %>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%">
+    <h3 class="w3-bar-item">Category</h3>
+    <ul class="list-group">
+        <a href="/radial-list/category/family"><li class="list-group-item active" aria-current="true">Family</li></a>
         <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
         <a href="/radial-list/category/food"><li class="list-group-item">Food</li></a>
-</ul>
-</div>
+        <a href="/radial-list"><li class="list-group-item">All</li></a>
+    </ul>
+    </div>
+    <% } else if(category == 'news') { %>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%">
+    <h3 class="w3-bar-item">Category</h3>
+    <ul class="list-group">
+        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
+        <a href="/radial-list/category/news"><li class="list-group-item active" aria-current="true">News</li></a>
+        <a href="/radial-list/category/food"><li class="list-group-item">Food</li></a>
+        <a href="/radial-list"><li class="list-group-item">All</li></a>
+    </ul>
+    </div>
+    <% } else if(category == 'food') { %>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%">
+    <h3 class="w3-bar-item">Category</h3>
+    <ul class="list-group">
+        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
+        <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
+        <a href="/radial-list/category/food"><li class="list-group-item active" aria-current="true">Food</li></a>
+        <a href="/radial-list"><li class="list-group-item">All</li></a>
+    </ul>
+    </div>
+    <% } else if(category == 'all') { %>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%">
+    <h3 class="w3-bar-item">Category</h3>
+    <ul class="list-group">
+        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
+        <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
+        <a href="/radial-list/category/food"><li class="list-group-item active" aria-current="true">Food</li></a>
+        <a href="/radial-list"><li class="list-group-item active" aria-current="true">All</li></a>
+    </ul>
+    </div>
+    <% } %>
 
 <!-- Main Content -->
 <main class="container">
@@ -45,7 +78,7 @@
     <div class="row" id="menusDiv">
         <% for(let count = 0; count < RadialList.length; count++) { %>
         <% btnId = count; %>
-        <% if((Role == 'Caregiver' && RadialList[count].privacy == 'Public') || (RadialList[count].user == UserID)) { %>
+        <% if(((Role == 'Caregiver' && RadialList[count].privacy == 'Public') || (RadialList[count].user == UserID)) && RadialList[count].category == category) { %>
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">

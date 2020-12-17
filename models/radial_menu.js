@@ -1,5 +1,9 @@
 let mongoose = require('mongoose');
 
+let fieldModel = mongoose.Schema({
+    text: String
+});
+
 // create a model class
 let radialModel = mongoose.Schema({
     title: String,
@@ -12,6 +16,11 @@ let radialModel = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     },
+    category: {
+        type: String,
+        default: '',
+        enum: ['family', 'news', 'food']
+    },
     /*
     firstField: String,
     secondField: String,
@@ -20,7 +29,7 @@ let radialModel = mongoose.Schema({
     fifthField: String,
     sixthField: String
     */
-    fields: []
+    fields: [fieldModel]
 },
 {
     collection: "radial_menus"
