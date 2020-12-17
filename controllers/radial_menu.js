@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
+let say = require('say');
 
 // create a reference to the model
 let Radial = require('../models/radial_menu');
@@ -14,7 +15,6 @@ module.exports.displayRadialList = async (req, res, next) => {
         .populate('users')
         .lean()
 
-        console.log(radialList[1].user);
 
         res.render('radial/list', {
             title: 'Radial Menus', 
@@ -36,13 +36,15 @@ module.exports.processAddPage = async (req, res, next) => {
     try {
         req.body.user = req.user.id;
         let fieldsArr = req.body.field;
+        let titlesArr = req.body.titleFields;
         let newRadial = await Radial.create(req.body);
         for(let i = 0; i < fieldsArr.length; i++) {
             Radial.update({_id: newRadial._id},
                 { 
                     $push: {
                         fields: [{
-                            "text": fieldsArr[i]
+                            "text": fieldsArr[i],
+                            "title": titlesArr[i]
                         }] 
                     }
                 }, (err) => {
@@ -77,13 +79,16 @@ module.exports.displayEditPage = (req, res, next) => {
 }
 
 module.exports.processEditPage = async (req, res, next) => {
-    let id = req.params.id
+    let id = req.params.id;
+    let fieldsArr = req.body.field;
+    let titlesArr = req.body.titleField;
+
     let updatedRadial = Radial({
         "_id": id,
         "title": req.body.title,
         "privacy": req.body.privacy,
         "user": req.body.user,
-        "fields":req.body.fields
+        "category": req.body.category
     });
 
     radial = Radial.findOneAndUpdate({_id: id}, updatedRadial, (err) => {
@@ -94,6 +99,22 @@ module.exports.processEditPage = async (req, res, next) => {
         }
         else
         {   
+            for(let i = 0; i < fieldsArr.length; i++) {
+                Radial.update({_id: id},
+                    { 
+                        $push: {
+                            fields: [{
+                                "text": fieldsArr[i],
+                                "title": titlesArr[i]
+                            }] 
+                        }
+                    }, (err) => {
+                        if(err) {
+                            console.log(err);
+                        }
+                    });
+            }
+            
             console.log(req.body);
             // refresh the book list
             res.redirect('/radial-list');
@@ -143,3 +164,27 @@ module.exports.displayCategory = async (req, res, next) => {
         return console.error(err);
     }
 }
+
+module.exports.displayContentPage = (req, res, next) => {
+    let id = req.params.id;
+    let number = parseInt(req.params.number);
+
+    Radial.findById(id, (err, radialToDisplay) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            //show the edit view
+            res.render('radial/content', {title: 'Content Radial', radial: radialToDisplay, Number: number, displayName: req.user ? req.user.displayName: ''})
+        }
+    });
+}
+
+module.exports.processContentPage = (req, res) => {
+    let str = req.body.fields;
+    say.speak(str);
+}
+

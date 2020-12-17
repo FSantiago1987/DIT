@@ -87,8 +87,12 @@
                         <tbody>
                         <% for(let countFields = 0; countFields < RadialList[count].fields.length; countFields++) { %>
                             <tr class="rowTable">
-                                <th scope="row">Field N<%= countFields + 1 %></th>
-                                <td><%= RadialList[count].fields[countFields].text %></td>
+                                <th scope="row"> <%= RadialList[count].fields[countFields].title %></th>
+                                <% if(RadialList[count].fields[countFields].length < 10) { %>
+                                    <td><a href="/radial-list/content/<%= RadialList[count]._id %>/<%= countFields %>"><%= RadialList[count].fields[countFields].text %></a></td>
+                                <% } else { %>
+                                    <td><a href="/radial-list/content/<%= RadialList[count]._id %>/<%= countFields %>"> <%- truncate(RadialList[count].fields[countFields].text, 20) %></a></td>
+                                <% } %>
                             </tr>
                         <% } %>
                         </tbody>

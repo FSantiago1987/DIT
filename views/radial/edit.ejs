@@ -37,15 +37,42 @@
                                 <option value="Private">Private</option>
                             <% } %>
                         </select>
+                    </div> 
+
+                    <div class="form-group fonticonUpdate">
+                        <label for="cateory" class="labelList">Category</label>
+                        <i class="fas fa-layer-group fa-lg"></i>
+                        <select class="form-control mdb-select md-form selectList" id="category" name="category" required>
+                            <% if (radial.category == "family") { %>
+                                <option value="family" selected>Family</option>
+                                <option value="news">News</option>
+                                <option value="food">Food</option>
+                            <% } else  if(radial.category == "news") { %>
+                                <option value="family">Family</option>
+                                <option value="news" selected>News</option>
+                                <option value="food">Food</option>
+                            <% } else if(radial.category == "food") { %>
+                                <option value="family">Family</option>
+                                <option value="news">News</option>
+                                <option value="food" selected>Food</option>
+                            <% } %>
+                        </select>
                     </div>                    
 
                     <% for(let i = 0; i < radial.fields.length; i++) { %>
                         <div class="form-group fonticonUpdate">
+                            <i class="fas fa-comment fa-list"></i>
+                            <label for="firstTextField" class="labelList">First Text Field</label>
+                            <input type="text" class="form-control inputsTitle" id="text"
+                            placeholder="Enter the title First Text Field" name="titleField" value="<%= radial.fields[i].title %>" 
+                            name="title" required>
+                        </div>
+
+                        <div class="form-group fonticonUpdate">
                             <i class="fas fa-comment fa-lg"></i>
-                            <label for="firstTextField" class="labelList">Field Number <%= i + 1 %></label>
                             <input type="text" class="form-control" id="firstTextField"
-                                placeholder="Enter the first Text Field" value="<%= radial.fields[i] %>" name="fields"
-                                required>
+                            placeholder="Enter the first Text Field" value="<%= radial.fields[i].text %>" name="field"
+                            required>
                         </div>
                     <% } %>
 

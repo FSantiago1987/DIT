@@ -1,7 +1,8 @@
 let mongoose = require('mongoose');
 
 let fieldModel = mongoose.Schema({
-    text: String
+    text: String,
+    title: String
 });
 
 // create a model class
@@ -29,7 +30,7 @@ let radialModel = mongoose.Schema({
     fifthField: String,
     sixthField: String
     */
-    fields: [fieldModel]
+    fields: [fieldModel],
 },
 {
     collection: "radial_menus"

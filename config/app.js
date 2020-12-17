@@ -3,6 +3,7 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let say = require('say');
 
 // modules for authentication
 let session = require('express-session');
@@ -76,6 +77,21 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/radial-list', radialRouter);
 app.use('/auth', authRouter);
+
+app.locals.truncate = (str, len) =>  {
+  if(str.length > len && str.length > 0) {
+    let new_str = str + '';
+    new_str = str.substr(0, len);
+    new_str = str.substr(0, new_str.lastIndexOf(' '));
+    new_str = new_str.length > 0 ? new_str: str.substr(0, len);
+    return new_str + '...';
+  }
+  return str;
+}
+
+app.locals.Speak = (str) => {
+  say.speak(str);
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
