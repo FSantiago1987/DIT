@@ -340,3 +340,12 @@ input[type=submit] {
 .sidenav-category a:hover {
   color: #064579;
 }
+
+/* Hide category list on mobile device */
+@media only screen and (max-width: 600px) {
+  .w3-sidebar {
+    display: none;
+  }
+}
+
+

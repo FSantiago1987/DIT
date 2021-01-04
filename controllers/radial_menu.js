@@ -5,6 +5,8 @@ let say = require('say');
 
 // create a reference to the model
 let Radial = require('../models/radial_menu');
+let userModel = require('../models/user');
+let User = userModel.User;
 
 module.exports.displayRadialList = async (req, res, next) => {
     try 
@@ -19,7 +21,8 @@ module.exports.displayRadialList = async (req, res, next) => {
         res.render('radial/list', {
             title: 'Radial Menus', 
             RadialList: radialList,
-            UserID: userID.toString(), 
+            UserID: userID.toString(),
+            messages: req.flash('shareMessage'),
             Role: role,
             displayName: req.user ? req.user.displayName: ''
         });
@@ -187,4 +190,41 @@ module.exports.processContentPage = (req, res) => {
     let str = req.body.fields;
     say.speak(str);
 }
+
+module.exports.performShare = (req, res, next) => {
+    let id = req.params.id;
+    let email = req.params.email;
+
+    User.findOne({"email": email}, (err, foundUser) => {
+        if(err) 
+        {
+            console.log(err);
+            res.end(err);
+            
+        }
+        else if(foundUser == null) 
+        {
+            req.flash('shareMessage', 'User not found');
+            return res.redirect('/radial-list');
+        }
+        else
+        {
+            Radial.updateOne({_id: id},
+                { 
+                    $push: {
+                        shared_users: foundUser._id.toString()
+                    }
+                }, (err) => {
+                    if(err) {
+                        console.log(err);
+                    }
+            });
+
+            req.flash('shareMessage', 'Shared successfully');
+            return res.redirect('/radial-list');
+        }
+    });
+ 
+}
+
 

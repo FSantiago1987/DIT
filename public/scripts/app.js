@@ -139,7 +139,7 @@ function closeNav() {
     document.body.style.backgroundColor = "white";
 }
 
-// display list page six field onlu
+// display list page six field only
 $(function(){
   if($("div").is('#menusDiv')){
     let tables = document.getElementsByClassName('table-borderless');
@@ -233,5 +233,16 @@ function stringifyNumber(n) {
 if (n < 20) return special[n];
 if (n%10 === 0) return deca[Math.floor(n/10)-2] + 'ieth';
 return deca[Math.floor(n/10)-2] + 'y-' + special[n%10];
+}
+
+function sendId(clicked) {
+  let shareLink = document.getElementById("share-link");
+  shareLink.href = "/radial-list/share/" + clicked;
+}
+
+function getEmail() {
+  let email = document.getElementById("recipient-email").value;
+  let shareLink = document.getElementById("share-link");
+  shareLink.href = shareLink.href + "/" + email;
 }
 

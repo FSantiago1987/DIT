@@ -36,4 +36,7 @@ router.get('/delete/:id', authRequired, radialController.performDelete);
 /* GET Route for the Radial List page - READ Operation */
 router.get('/category/:category', authRequired, radialController.displayCategory);
 
+/* GET to perform Share - SHARE Operation */
+router.get('/share/:id/:email', authRequired, radialController.performShare);
+
 module.exports = router;
