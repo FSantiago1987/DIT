@@ -1,0 +1,143 @@
+<!-- Include Defatul HTML Header -->
+<%- include ../partials/header.ejs %>
+<!-- Include Default Html Navigation Menu -->
+<%- include ../partials/main_nav.ejs %>
+
+<!-- Content for the Add page -->
+<main class="jumbotron text-center titleMain">
+    <h1 class="jumbotron-heading display-3"><%= title %></h1>
+</main>
+<div class="modal-dialog text-center">
+    <div class="col main-section">
+        <div class="modal-content model-content-add">
+            <div class="col-12 user-img">
+                <img src="/assets/images/add.png">
+            </div>
+            <div class="col-12 form-input">
+                <form method="POST" autocomplete="off" id="addForm">
+                    <div class="form-group fonticonUpdate">
+                        <i class="fab fa-elementor fa-lg"></i>
+                        <label for="titleTextField" class="labelList">Title</label>
+                        <input type="text" class="form-control" id="titleTextField" placeholder="Enter the Sundial Title"
+                            name="title" required>
+                    </div>
+
+                    <div class="form-group fonticonUpdate">
+                        <label for="privacy" class="labelList">Privacy</label>
+                        <i class="fas fa-user-secret fa-lg"></i>
+                        <select class="form-control mdb-select md-form selectList" id="privacy" name="privacy" required>
+                            <option value="Public" selected>Public</option>
+                            <option value="Private">Private</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group fonticonUpdate">
+                        <label for="category" class="labelList">Category</label>
+                        <i class="fas fa-layer-group fa-lg"></i>
+                        <select class="form-control mdb-select md-form selectList" id="category" name="category" required>
+                            <option value="family">Family</option>
+                            <option value="news">News</option>
+                            <option value="food">Food</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group fonticonUpdate">
+                        <i class="fas fa-list fa-lg"></i>
+                        <label for="firstTextField" class="labelList">First Text Field</label>
+                        <input type="text" class="form-control inputsTitle" id="text"
+                            placeholder="Enter the title First Text Field" name="titleFields" required>
+                    </div>
+
+
+                    <div class="form-group fonticon">
+                        <i class="fas fa-comment fa-lg"></i>
+                        <input type="text" class="form-control inputsField" id="firstTextField"
+                            placeholder="Enter the first Text Field" name="field" required>
+                    </div>
+
+                    <div class="form-group fonticonUpdate">
+                        <i class="fas fa-list fa-lg"></i>
+                        <label for="secondTextField" class="labelList">Second Text Field</label>
+                        <input type="text" class="form-control inputsTitle" id="text"
+                            placeholder="Enter the title Second Text Field" name="titleFields" required>
+                    </div>
+
+                    <div class="form-group fonticon">
+                        <i class="fas fa-comment fa-lg"></i>
+                        <input type="text" class="form-control inputsField" id="secondTextField"
+                            placeholder="Enter the second Text Field" name="field" required>
+                    </div>
+
+                    <div class="form-group fonticonUpdate">
+                        <i class="fas fa-list fa-lg"></i>
+                        <label for="thirdTextField" class="labelList">Third Text Field</label>
+                        <input type="text" class="form-control inputsTitle" id="text"
+                            placeholder="Enter the title Third Text Field" name="titleFields" required>
+                    </div>
+
+                    <div class="form-group fonticon">
+                        <i class="fas fa-comment fa-lg"></i>
+                        <input type="text" class="form-control inputsField" id="thirdTextField"
+                            placeholder="Enter the third Text Field" name="field" required>
+                    </div>
+
+                    <div class="form-group fonticonUpdate">
+                        <i class="fas fa-list fa-lg"></i>
+                        <label for="fourthTextField" class="labelList">Fourth Text Field</label>
+                        <input type="text" class="form-control inputsTitle" id="text"
+                            placeholder="Enter the title Fourth Text Field" name="titleFields" required>
+                    </div>
+
+                    <div class="form-group fonticon">
+                        <i class="fas fa-comment fa-lg"></i>
+                        <input type="text" class="form-control inputsField" id="fourthTextField"
+                            placeholder="Enter the fourth Text Field" name="field" required>
+                    </div>
+
+                    <div class="form-group fonticonUpdate">
+                        <i class="fas fa-list fa-lg"></i>
+                        <label for="fifthTextField" class="labelList">Fifth Text Field</label>
+                        <input type="text" class="form-control inputsTitle" id="text"
+                            placeholder="Enter the title Fifth Text Field" name="titleFields" required>
+                    </div>
+
+                    <div class="form-group fonticon">
+                        <i class="fas fa-comment fa-lg"></i>
+                        <input type="text" class="form-control inputsField" id="fifthTextField"
+                            placeholder="Enter the fifth Text Field" name="field" required>
+                    </div>
+
+                    <div class="form-group fonticonUpdate">
+                        <i class="fas fa-list fa-lg"></i>
+                        <label for="sixthTextField" class="labelList">Sixth Text Field</label>
+                        <input type="text" class="form-control inputsTitle" id="text"
+                            placeholder="Enter the title Sixth Text Field" name="titleFields" required>
+                    </div>
+
+                    <div class="form-group fonticon">
+                        <i class="fas fa-comment fa-lg"></i>
+                        <input type="text" class="form-control inputsField" id="sixthTextField"
+                            placeholder="Enter the Sixth Text Field" name="field" required>
+                    </div>
+
+                    <button class="btn btn-success addElementButton" onclick="addElements()" type="button" id="submitBtn">Add element</button>
+                    <div class="divider"></div>
+                    <button class="btn btn-primary submitButton" type="submit">
+                        <i class="fas fa-edit"></i> Submit</button>
+
+                    
+
+                    <a href="/radial-list" class="btn btn-warning cancelButton">
+                        <i class="fas fa-undo"></i> Cancel</a>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Include Defatul HTML Bottom -->
+<%- include ../partials/bottom_nav.ejs %>
+<!-- Include Defatul Footer -->
+<%- include ../partials/footer.ejs %>

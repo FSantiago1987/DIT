@@ -1,0 +1,137 @@
+<!-- Include Defatul HTML Header -->
+<%- include ../partials/header.ejs %>
+<!-- Include Default Html Navigation Menu -->
+<%- include ../partials/main_nav.ejs %>
+<script src="/scripts/app.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<% if(category == 'family') { %>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
+    <h3 class="w3-bar-item">Category</h3>
+    <ul class="list-group">
+        <a href="/radial-list/category/family"><li class="list-group-item active" aria-current="true">Family</li></a>
+        <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
+        <a href="/radial-list/category/food"><li class="list-group-item">Food</li></a>
+        <a href="/radial-list"><li class="list-group-item">All</li></a>
+    </ul>
+    </div>
+    <% } else if(category == 'news') { %>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
+    <h3 class="w3-bar-item">Category</h3>
+    <ul class="list-group">
+        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
+        <a href="/radial-list/category/news"><li class="list-group-item active" aria-current="true">News</li></a>
+        <a href="/radial-list/category/food"><li class="list-group-item">Food</li></a>
+        <a href="/radial-list"><li class="list-group-item">All</li></a>
+    </ul>
+    </div>
+    <% } else if(category == 'food') { %>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
+    <h3 class="w3-bar-item">Category</h3>
+    <ul class="list-group">
+        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
+        <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
+        <a href="/radial-list/category/food"><li class="list-group-item active" aria-current="true">Food</li></a>
+        <a href="/radial-list"><li class="list-group-item">All</li></a>
+    </ul>
+    </div>
+    <% } else if(category == 'all') { %>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
+    <h3 class="w3-bar-item">Category</h3>
+    <ul class="list-group">
+        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
+        <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
+        <a href="/radial-list/category/food"><li class="list-group-item active" aria-current="true">Food</li></a>
+        <a href="/radial-list"><li class="list-group-item active" aria-current="true">All</li></a>
+    </ul>
+    </div>
+    <% } %>
+
+<!-- Main Content -->
+<main class="container">
+    <% if(RadialList.length == 0) { %>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Sundials</h1>
+            <p class="lead text-muted">You don't have Sundials</p>
+            <p>
+                <a href="/radial-list/add" class="btn btn-primary" role="button">
+                    <i class="fas fa-plus-circle"></i> Create New Sundial</a>
+            </p>
+        </div>
+    </section>
+    <% } else { %>
+    <h1><%= title %></h1>
+    <a href="/radial-list/add" class="btn btn-primary" role="button">
+        <i class="fas fa-plus-circle"></i>Add a New Sundial</a>
+    <br>
+    <!-- Search box for titles -->
+
+    <div class="autocomplete" style="width:300px;">
+        <input id="searchTitle" type="text" name="title" placeholder="Titles">
+    </div>
+    <button onclick="findTitle()" class="btn btn-sm btn-secondary">Search</button>
+
+    
+
+    <!-- Repeatable Template Row -->
+    <div class="row" id="menusDiv">
+        <% for(let count = 0; count < RadialList.length; count++) { %>
+        <% btnId = count; %>
+        <% if(((Role == 'Caregiver' && RadialList[count].privacy == 'Public') || (RadialList[count].user == UserID)) && RadialList[count].category == category) { %>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-text"><%= RadialList[count].title %></h3>
+                    <table class="table table-borderless" id="table<%= btnId %>">
+                        <tbody>
+                        <% for(let countFields = 0; countFields < RadialList[count].fields.length; countFields++) { %>
+                            <tr class="rowTable">
+                                <th scope="row"> <%= RadialList[count].fields[countFields].title %></th>
+                                <% if(RadialList[count].fields[countFields].length < 10) { %>
+                                    <td><a href="/radial-list/content/<%= RadialList[count]._id %>/<%= countFields %>"><%= RadialList[count].fields[countFields].text %></a></td>
+                                <% } else { %>
+                                    <td><a href="/radial-list/content/<%= RadialList[count]._id %>/<%= countFields %>"> <%- truncate(RadialList[count].fields[countFields].text, 20) %></a></td>
+                                <% } %>
+                            </tr>
+                        <% } %>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" id="previous<%= btnId %>" class="PreviousBtn btn btn-sm btn-outline-primary" onclick="previous_click(this.id)" >
+                                <i class="fas fa-arrow-left"></i> Previous</button>
+                            <a href="/radial-list/edit/<%= RadialList[count]._id %>"><button type="button"
+                                    class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-pencil-alt"></i> Edit</button></a>
+                            <a href="/radial-list/delete/<%= RadialList[count]._id %>"><button type="button"
+                                    class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-trash-alt"></i> Delete</button></a>
+                            <button type="button" id="next<%= btnId %>" class="nextBtn btn btn-sm btn-outline-primary" onclick="next_click(this.id)">
+                                <i class="fas fa-arrow-right"></i> Next</button>
+                        </div>
+                        
+                    </div>
+                    <small class="text-muted"><%= RadialList[count]._id %></small>
+                </div>
+            </div>
+        </div>
+        <% } %>
+        <% } %>
+        <% } %>
+    </div>
+    <script>
+        let menusDiv = document.getElementById("menusDiv");
+        let menusDivClass = menusDiv.getElementsByClassName("card-text");
+        let titles = [];
+        for (let i = 0; i < menusDivClass.length; i++) {
+            titles.push(menusDivClass[i].innerHTML)
+        }
+        autocomplete(document.getElementById("searchTitle"), titles);
+    </script>
+</main>
+
+<!-- Include Defatul HTML Bottom -->
+<%- include ../partials/bottom_nav.ejs %>
+<!-- Include Defatul Footer -->
+<%- include ../partials/footer.ejs %>

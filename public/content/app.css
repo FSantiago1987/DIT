@@ -1,0 +1,406 @@
+/* Custom CSS */
+body {
+  padding-bottom: 60px;
+  font-family: "Lato", sans-serif;
+  transition: background-color .5s;
+  background-image: url("../assets/images/background2.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+footer {
+    padding-top: 80px;
+}
+
+footer h6 {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+}
+
+.hello_msg {
+    font-size: 20px !important;
+    margin-right: 10px !important;
+    color: white !important;
+    font-weight: 450 !important;
+}
+
+/* styling for Jumbotron Title */
+.titleMain {
+  background: none;
+  text-align: center;
+  height: 100px;
+  color: #daa520;
+  text-shadow: 3px 3px #818181;
+  font-size: 130px !important;
+  letter-spacing: 4px;
+  }
+
+.display-4, .display-2 {
+text-shadow: 2px 2px #818181;
+}
+
+.display-2 {
+font-size: 70px;
+}
+
+.display-3 {
+font-size: 70px;
+margin-top: -40px;
+}
+
+.display-4 {
+font-size: 45px;
+}
+
+/* styling for sidenav */
+.sidenav {
+height: 100%;
+width: 0;
+position: fixed;
+z-index: 1;
+top: 0;
+left: 0;
+background-color:#111;
+overflow-x: hidden;
+transition: 0.5s;
+padding-top: 60px;
+}
+
+.sidenav a {
+padding: 8px 8px 8px 32px;
+text-decoration: none;
+font-size: 20px;
+color: #818181;
+display: block;
+transition: 0.3s;
+}
+
+.sidenav a:hover {
+color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+position: absolute;
+top: 0;
+right: 25px;
+font-size: 36px;
+margin-left: 50px;
+}
+
+/* styling for Modal Login and Register */
+#main {
+  transition: margin-left .5s !important;
+}
+
+.main-section {
+margin: 0 auto;
+margin-top: 70px;
+padding: 0;
+}
+
+.modal-content {
+background-color: #434e5a;
+padding: 0 18px;
+border-radius: 10px;
+}
+
+.displayInfo {
+  min-width: 600px;
+}
+
+.model-content-add {
+background-color: darkslategray;
+}
+
+.model-content-update {
+background-color: #13445e;
+}
+
+
+.user-img img {
+height: 150px;
+width: 150px;
+}
+
+.user-img {
+margin-top: -80px;
+margin-bottom: 45px;
+}
+
+.form-group {
+margin-bottom: 25px;
+}
+
+.form-group input {
+height: 42px;
+border-radius: 5px;
+border: 0;
+font-size: 18px;
+letter-spacing: 2px;
+padding-left: 54px;
+}
+
+.textArea {
+  background-color: #d4d4d4;
+  text-align: justify;
+  text-justify: inter-word; 
+  border-radius: 5px;
+  border: 0;
+  font-size: 18px;
+  letter-spacing: 2px; 
+  padding-left: 54px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  height: 200px!important;
+}
+
+.fonticon
+{ 
+position: relative; 
+} 
+
+.fonticon i {
+position: absolute; 
+left: 15px; 
+top: 15px; 
+color: gray; 
+}
+
+
+.fonticonUpdate
+{ 
+position: relative; 
+} 
+
+.fonticonUpdate i {
+position: absolute; 
+left: 15px; 
+top: 50px; 
+color: gray; 
+}
+
+/* Styling Buttons */
+.loginButton, .registerButton, .addButton, .submitButton {
+  background-color: #1c6288;
+  font-size: 19px;
+  border-radius: 5px;
+  padding: 7px 14px;
+  border: 1px solid #daf1ff;
+  margin-bottom: 20px;
+  }
+
+  .addElementButton {
+    background-color: coral;
+    font-size: 19px;
+    border-radius: 5px;
+    padding: 7px 14px;
+    border: 1px solid #daf1ff;
+    margin-bottom: 20px;
+  }
+  
+  .cancelButton {
+  font-size: 19px;
+  border-radius: 5px;
+  padding: 7px 14px;
+  border: 1px solid #daf1ff;
+  margin-bottom: 20px;
+  }
+  
+  .googleButton {
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 6px 15px;
+  border: 1px solid #daf1ff;
+  }
+  
+  .loginButton:hover, .registerButton:hover, .addButton:hover, .submitButton:hover {
+  background-color: #13445e;
+  border: 1px solid #daf1ff;
+  }
+  
+  .cancelButton:hover {
+  background-color: #daa520;
+  border: 1px solid #daf1ff;
+  }
+  
+  .googleButton:hover {
+  border: 1px solid #daf1ff;
+  }
+
+  .addElementButton:hover {
+    background-color: darkgoldenrod;
+    border: 1px solid #daf1ff;
+  }
+
+/* Styling Lables */
+
+.labelList {
+  font-size: 25px;
+  color: antiquewhite;
+  text-align: left;
+}
+
+.selectList {
+  letter-spacing: 2px;
+  font-size: 18px;
+  padding-left: 54px;
+}
+  
+  .forgot {
+  padding: 5px 0 25px;
+  }
+  
+  .forgot a {
+  color: #daf1ff;
+  }
+  
+  .table {
+  background-color: whitesmoke;
+  }
+  
+  @media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+  }
+
+/* styling for search box */
+* { box-sizing: border-box; }
+body {
+  font: 16px Arial;
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+.sidenav-category {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 140px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+.sidenav-category a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #2196F3;
+  display: block;
+}
+
+.sidenav-category a:hover {
+  color: #064579;
+}
+
+/* Hide category list on mobile device */
+@media only screen and (max-width: 600px) {
+  .w3-sidebar {
+    display: none;
+  }
+}
+
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+
+  #mobile-txt {
+    margin-bottom: 200px!important;
+    display: block!important;
+    color: aqua!important;
+  }
+}
+
+@media screen and (max-width: 650px) {
+
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 15px!important;
+  }
+
+  .logo {
+    height: 70px!important;
+    width: 80px!important;
+  }
+
+  #mobile-txt-title {
+    font-size: 50px;
+  }
+
+  #mobile-txt-sub {
+    font-size: 30px;
+    padding-top: 15px!important;
+  }
+
+  .titleMain {
+    margin-bottom: 150px!important;
+  }
+
+  .hello_msg {
+    font-size: 15px !important;
+    margin-right: -10px !important;
+    font-weight: 250 !important;
+}
+
+.displayInfo {
+  min-width: 100px;
+}
+
+}
+
