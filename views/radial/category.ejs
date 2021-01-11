@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <br>
-                    <p><%= RadialList[count].category %></p>
+                    <p>Category: <%= capitalize(RadialList[count].category) %></p>
                     <table class="table table-borderless" id="table<%= btnId %>">
                         <tbody>
                         <% for(let countFields = 0; countFields < RadialList[count].fields.length; countFields++) { %>
