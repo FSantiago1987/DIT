@@ -43,14 +43,54 @@ module.exports.processAddPage = async (req, res, next) => {
         req.body.user = req.user.id;
         let fieldsArr = req.body.field;
         let titlesArr = req.body.titleFields;
+        
+        let objArr = [
+            {
+                "text": fieldsArr[0],
+                "title": titlesArr[0]
+            },
+            {
+                "text": fieldsArr[1],
+                "title": titlesArr[1]
+            },
+            {
+                "text": fieldsArr[2],
+                "title": titlesArr[2]
+            },
+            {
+                "text": fieldsArr[3],
+                "title": titlesArr[3]
+            },
+            {
+                "text": fieldsArr[4],
+                "title": titlesArr[4]
+            },
+            {
+                "text": fieldsArr[5],
+                "title": titlesArr[5]
+            }
+        ]
+
         let newRadial = await Radial.create(req.body);
+            Radial.update({_id: newRadial._id},
+                { 
+                    $push: {
+                        fields: objArr
+                    }
+                }, (err) => {
+                    if(err) {
+                        console.log(err);
+                    }
+                });
+        
+        /*
         for(let i = 0; i < fieldsArr.length; i++) {
             Radial.update({_id: newRadial._id},
                 { 
                     $push: {
                         fields: [{
                             "text": fieldsArr[i],
-                            "title": titlesArr[i]
+                            "title": titlesArr[i],
                         }] 
                     }
                 }, (err) => {
@@ -59,7 +99,7 @@ module.exports.processAddPage = async (req, res, next) => {
                     }
                 });
         }
-
+        */
         res.redirect('/radial-list');
     } catch (err) {
         console.log(err);
@@ -90,6 +130,33 @@ module.exports.processEditPage = async (req, res, next) => {
     let fieldsArr = req.body.field;
     let titlesArr = req.body.titleField;
 
+    let objArr = [
+        {
+            "text": fieldsArr[0],
+            "title": titlesArr[0]
+        },
+        {
+            "text": fieldsArr[1],
+            "title": titlesArr[1]
+        },
+        {
+            "text": fieldsArr[2],
+            "title": titlesArr[2]
+        },
+        {
+            "text": fieldsArr[3],
+            "title": titlesArr[3]
+        },
+        {
+            "text": fieldsArr[4],
+            "title": titlesArr[4]
+        },
+        {
+            "text": fieldsArr[5],
+            "title": titlesArr[5]
+        }
+    ]
+
     let updatedRadial = Radial({
         "_id": id,
         "title": req.body.title,
@@ -106,13 +173,24 @@ module.exports.processEditPage = async (req, res, next) => {
         }
         else
         {   
+            Radial.update({_id: id},
+                { 
+                    $push: {
+                        fields: objArr
+                    }
+                }, (err) => {
+                    if(err) {
+                        console.log(err);
+                    }
+                });
+            /*
             for(let i = 0; i < fieldsArr.length; i++) {
                 Radial.update({_id: id},
                     { 
                         $push: {
                             fields: [{
                                 "text": fieldsArr[i],
-                                "title": titlesArr[i]
+                                "title": titlesArr[i],
                             }] 
                         }
                     }, (err) => {
@@ -121,7 +199,7 @@ module.exports.processEditPage = async (req, res, next) => {
                         }
                     });
             }
-            
+            */
             console.log(req.body);
             // refresh the book list
             res.redirect('/radial-list');
