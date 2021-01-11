@@ -20,8 +20,7 @@ let radialModel = mongoose.Schema({
     shared_users:[],
     category: {
         type: String,
-        default: '',
-        enum: ['family', 'news', 'food']
+        default: ''
     },
     /*
     firstField: String,

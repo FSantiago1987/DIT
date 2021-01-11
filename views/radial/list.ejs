@@ -7,20 +7,31 @@
 
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
   <h3 class="w3-bar-item">Category</h3>
-  <ul class="list-group" id="category-list">
-        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
-        <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
-        <a href="/radial-list/category/food"><li class="list-group-item">Food</li></a>
-</ul>
+    <ul class="list-group" id="category-list">
+    <% for(let count = 0; count < Categories.length; count++) { %>
+        <a href="/radial-list/category/<%= Categories[count].toLowerCase() %>"><li class="list-group-item"><%= Categories[count] %><a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right"><i class="fas fa-times"></i></a></li></a>
+    <% } %>
+    </ul>
+    <br><input class="form-control mr-sm-2" id="addCategory" type="search" name="newcat" placeholder="New Category" aria-label="Search">
+    <a id="category-link" href="/radial-list/add-category"><button onclick="getCategory()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button></a>
 </div>
 
 <!-- Main Content -->
 
 <main class="container">
-    <% if(RadialList.length == 0) { %>
+    <% let empty = true %>
+    <% for(let count = 0; count < RadialList.length; count++) { %>
+        <% if(RadialList[count].user == UserID || RadialList[count].shared_users.includes(UserID)) { %>
+            <% empty = false %>
+            <% break %>
+        <% } %>
+    <% } %>
+    
+    <% if(RadialList.length == 0 || empty == true) { %>
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Radial Menus</h1>
+            
             <p class="lead text-muted">You don't have radial menus</p>
             <p>
                 <a href="/radial-list/add" class="btn btn-primary" role="button">
@@ -42,14 +53,12 @@
     <a href="/radial-list/add" class="btn btn-primary" role="button">
         <i class="fas fa-plus-circle"></i>Add a Radial Menu</a>
     <br>
-    <!-- Search box for titles -->
 
+    <!-- Search box for titles -->
     <div class="autocomplete" style="width:300px;">
         <input id="searchTitle" type="text" name="title" placeholder="Titles">
     </div>
     <button onclick="findTitle()" class="btn btn-sm btn-secondary">Search</button>
-
-    
 
     <!-- Repeatable Template Row -->
     <div class="row" id="menusDiv">
@@ -68,6 +77,7 @@
                         </div>
                     </div>
                     <br>
+                    <p><%= RadialList[count].category %></p>
                     <table class="table table-borderless" id="table<%= btnId %>">
                         <tbody>
                         <% for(let countFields = 0; countFields < RadialList[count].fields.length; countFields++) { %>
@@ -97,7 +107,7 @@
                         </div>
                         
                     </div>
-                    <small class="text-muted"><%= RadialList[count]._id %></small>
+                    <small class="text-muted"></small>
                 </div>
             </div>
         </div>
@@ -105,8 +115,6 @@
         <% } %>
         <% } %>
     </div>
-
-    
 
     <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

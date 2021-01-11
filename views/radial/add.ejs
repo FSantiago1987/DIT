@@ -35,9 +35,9 @@
                         <label for="category" class="labelList">Category</label>
                         <i class="fas fa-layer-group fa-lg"></i>
                         <select class="form-control mdb-select md-form selectList" id="category" name="category" required>
-                            <option value="family">Family</option>
-                            <option value="news">News</option>
-                            <option value="food">Food</option>
+                            <% for(let count = 0; count < Categories.length; count++) { %>
+                            <option value="<%= Categories[count] %>"><%= Categories[count] %></option>
+                            <% } %>
                         </select>
                     </div>
 

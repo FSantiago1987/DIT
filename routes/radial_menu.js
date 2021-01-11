@@ -30,7 +30,7 @@ router.get('/content/:id/:number', authRequired, radialController.displayContent
 /* POST Route for processing Text Speech  */
 router.post('/content/:id/:number', authRequired, radialController.processContentPage);
 
-/* GET to perform  Deletion - DELETE Operation */
+/* GET to perform Deletion - DELETE Operation */
 router.get('/delete/:id', authRequired, radialController.performDelete);
 
 /* GET Route for the Radial List page - READ Operation */
@@ -38,5 +38,11 @@ router.get('/category/:category', authRequired, radialController.displayCategory
 
 /* GET to perform Share - SHARE Operation */
 router.get('/share/:id/:email', authRequired, radialController.performShare);
+
+/* GET to add a new Category - Create Operation */
+router.get('/add-category/:newcat', authRequired, radialController.addCategory);
+
+/* GET to delete a Category - Delete Operation */
+router.get('/delete-category/:newcat', authRequired, radialController.deleteCategory);
 
 module.exports = router;
