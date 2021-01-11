@@ -28,6 +28,11 @@ let GoogleUser = new mongoose.Schema
             trim: true,
             required: 'Role is required'
         },
+        categories:
+        {
+            type: Array,
+            default: ['Family', 'News','Food']
+        },
         created:
         {
             type: Date,

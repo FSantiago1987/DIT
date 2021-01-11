@@ -264,3 +264,9 @@ function getEmail() {
   shareLink.href = shareLink.href + "/" + email;
 }
 
+function getCategory() {
+  let category = document.getElementById("addCategory").value;
+  let catLink = document.getElementById("category-link");
+  catLink.href = catLink.href + "/" + category;
+}
+

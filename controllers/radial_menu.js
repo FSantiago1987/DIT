@@ -2,7 +2,6 @@ let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 
-
 // create a reference to the model
 let Radial = require('../models/radial_menu');
 let userModel = require('../models/user');
@@ -13,16 +12,18 @@ module.exports.displayRadialList = async (req, res, next) => {
     {
         let userID = req.user._id;
         let role = req.user.role;
+        let categories = req.user.categories;
         let radialList = await Radial.find()
         .populate('users')
         .lean()
 
 
         res.render('radial/list', {
-            title: 'Sundials', 
+            title: 'Radial Menus', 
             RadialList: radialList,
             UserID: userID.toString(),
             messages: req.flash('shareMessage'),
+            Categories: categories,
             Role: role,
             displayName: req.user ? req.user.displayName: ''
         });
@@ -32,7 +33,8 @@ module.exports.displayRadialList = async (req, res, next) => {
 }
 
 module.exports.displayAddPage = (req, res, next) => {
-    res.render('radial/add', {title: 'Add New Sundial', displayName: req.user ? req.user.displayName: ''})          
+    let categories = req.user.categories;
+    res.render('radial/add', {title: 'Add Radial Menu', Categories: categories, displayName: req.user ? req.user.displayName: ''})          
 }
 
 module.exports.processAddPage = async (req, res, next) => {
@@ -66,6 +68,7 @@ module.exports.processAddPage = async (req, res, next) => {
 
 module.exports.displayEditPage = (req, res, next) => {
     let id = req.params.id;
+    let categories = req.user.categories;
 
     Radial.findById(id, (err, radialToEdit) => {
         if(err)
@@ -76,7 +79,7 @@ module.exports.displayEditPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('radial/edit', {title: 'Edit Sundial', radial: radialToEdit, displayName: req.user ? req.user.displayName: ''})
+            res.render('radial/edit', {title: 'Edit Radial', radial: radialToEdit, Categories: categories, displayName: req.user ? req.user.displayName: ''})
         }
     });
 }
@@ -149,15 +152,16 @@ module.exports.displayCategory = async (req, res, next) => {
     {
         let userID = req.user._id;
         let role = req.user.role;
+        let categories = req.user.categories;
         let radialList = await Radial.find()
         .populate('users')
         .lean()
 
-        console.log(radialList[1].user);
-
         res.render('radial/category', {
-            title: 'Sundials',
+            title: 'Radial Menus',
             category: category,
+            Categories: categories,
+            messages: req.flash('shareMessage'),
             RadialList: radialList,
             UserID: userID.toString(), 
             Role: role,
@@ -166,6 +170,40 @@ module.exports.displayCategory = async (req, res, next) => {
     } catch (err) {
         return console.error(err);
     }
+}
+
+module.exports.addCategory = (req, res, next) => {
+    let userID = req.user._id;
+    let newcat = req.params.newcat;
+
+    User.updateOne({_id: userID}, { 
+        $push: {
+            categories: newcat
+        }
+        }, (err) => {
+            if(err) {
+                console.log(err);
+        }
+    });
+
+    res.redirect('/radial-list');
+}
+
+module.exports.deleteCategory = (req, res, next) => {
+    let userID = req.user._id;
+    let newcat = req.params.newcat;
+
+    User.updateOne({_id: userID}, { 
+        $pull: {
+            categories: newcat
+        }
+        }, (err) => {
+            if(err) {
+                console.log(err);
+        }
+    });
+
+    res.redirect('/radial-list');
 }
 
 module.exports.displayContentPage = (req, res, next) => {

@@ -5,47 +5,19 @@
 <script src="/scripts/app.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<% if(category == 'family') { %>
-    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
     <h3 class="w3-bar-item">Category</h3>
     <ul class="list-group">
-        <a href="/radial-list/category/family"><li class="list-group-item active" aria-current="true">Family</li></a>
-        <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
-        <a href="/radial-list/category/food"><li class="list-group-item">Food</li></a>
+        <% for(let count = 0; count < Categories.length; count++) { %>
+            <% if(category == Categories[count].toLowerCase()) { %>
+                <a href="/radial-list/category/<%= Categories[count].toLowerCase() %>"><li class="list-group-item active" aria-current="true"><%= Categories[count] %><a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right"><i class="fas fa-times"></i></a></li></a>
+            <% } else { %>
+                <a href="/radial-list/category/<%= Categories[count].toLowerCase() %>"><li class="list-group-item"><%= Categories[count] %><a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right"><i class="fas fa-times"></i></a></li></a>
+            <% } %>
+        <% } %>
         <a href="/radial-list"><li class="list-group-item">All</li></a>
     </ul>
-    </div>
-    <% } else if(category == 'news') { %>
-    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
-    <h3 class="w3-bar-item">Category</h3>
-    <ul class="list-group">
-        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
-        <a href="/radial-list/category/news"><li class="list-group-item active" aria-current="true">News</li></a>
-        <a href="/radial-list/category/food"><li class="list-group-item">Food</li></a>
-        <a href="/radial-list"><li class="list-group-item">All</li></a>
-    </ul>
-    </div>
-    <% } else if(category == 'food') { %>
-    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
-    <h3 class="w3-bar-item">Category</h3>
-    <ul class="list-group">
-        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
-        <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
-        <a href="/radial-list/category/food"><li class="list-group-item active" aria-current="true">Food</li></a>
-        <a href="/radial-list"><li class="list-group-item">All</li></a>
-    </ul>
-    </div>
-    <% } else if(category == 'all') { %>
-    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
-    <h3 class="w3-bar-item">Category</h3>
-    <ul class="list-group">
-        <a href="/radial-list/category/family"><li class="list-group-item">Family</li></a>
-        <a href="/radial-list/category/news"><li class="list-group-item">News</li></a>
-        <a href="/radial-list/category/food"><li class="list-group-item active" aria-current="true">Food</li></a>
-        <a href="/radial-list"><li class="list-group-item active" aria-current="true">All</li></a>
-    </ul>
-    </div>
-    <% } %>
+</div>
 
 <!-- Main Content -->
 <main class="container">
@@ -62,27 +34,43 @@
     </section>
     <% } else { %>
     <h1><%= title %></h1>
+    <%if(messages == "User not found") {%>
+    <div class="alert alert-danger">
+        <%= messages %>
+    </div>
+    <% } else if(messages == "Shared successfully") { %>
+    <div class="alert alert-success">
+        <%= messages %>
+    </div>
+    <% } %>
     <a href="/radial-list/add" class="btn btn-primary" role="button">
-        <i class="fas fa-plus-circle"></i>Add a New Sundial</a>
+        <i class="fas fa-plus-circle"></i>Add a Radial Menu</a>
     <br>
-    <!-- Search box for titles -->
 
+    <!-- Search box for titles -->
     <div class="autocomplete" style="width:300px;">
         <input id="searchTitle" type="text" name="title" placeholder="Titles">
     </div>
     <button onclick="findTitle()" class="btn btn-sm btn-secondary">Search</button>
 
-    
-
     <!-- Repeatable Template Row -->
     <div class="row" id="menusDiv">
         <% for(let count = 0; count < RadialList.length; count++) { %>
         <% btnId = count; %>
-        <% if(((Role == 'Caregiver' && RadialList[count].privacy == 'Public') || (RadialList[count].user == UserID)) && RadialList[count].category == category) { %>
+        <% if(((Role == 'Caregiver' && RadialList[count].privacy == 'Public') || (RadialList[count].user == UserID)) && RadialList[count].category.toLowerCase() == category) { %>
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
-                    <h3 class="card-text"><%= RadialList[count].title %></h3>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3 class="card-text"><%= RadialList[count].title %></h3>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary share-btn" data-toggle="modal" data-target="#shareModal" data-whatever="3" onclick="sendId('<%= RadialList[count]._id %>')" >Share</button>
+                        </div>
+                    </div>
+                    <br>
+                    <p><%= RadialList[count].category %></p>
                     <table class="table table-borderless" id="table<%= btnId %>">
                         <tbody>
                         <% for(let countFields = 0; countFields < RadialList[count].fields.length; countFields++) { %>
@@ -112,7 +100,7 @@
                         </div>
                         
                     </div>
-                    <small class="text-muted"><%= RadialList[count]._id %></small>
+                    <small class="text-muted"></small>
                 </div>
             </div>
         </div>
@@ -120,6 +108,30 @@
         <% } %>
         <% } %>
     </div>
+
+    <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Share Content</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-email" placeholder="Enter user email">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a id="share-link" href="/radial-list/share/id/email"><button onclick="getEmail()" type="button" class="btn btn-primary">Share</button></a>
+        </div>
+        </div>
+    </div>
+    </div>
+
     <script>
         let menusDiv = document.getElementById("menusDiv");
         let menusDivClass = menusDiv.getElementsByClassName("card-text");

@@ -36,4 +36,10 @@ router.get('/category/:category', authRequired, radialController.displayCategory
 /* GET to perform Share - SHARE Operation */
 router.get('/share/:id/:email', authRequired, radialController.performShare);
 
+/* GET to add a new Category - Create Operation */
+router.get('/add-category/:newcat', authRequired, radialController.addCategory);
+
+/* GET to delete a Category - Delete Operation */
+router.get('/delete-category/:newcat', authRequired, radialController.deleteCategory);
+
 module.exports = router;
