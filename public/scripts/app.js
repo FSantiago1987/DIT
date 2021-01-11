@@ -201,29 +201,47 @@ function previous_click(clicked_id) {
 
 function addElements() {
   let form = document.getElementById("addForm");
-  let submutBtn = document.querySelector("#submitBtn");
-  let innerTr = document.getElementsByTagName("input");
+  let submitBtn = document.querySelector("#submitBtn");
+  let innerTitle = document.getElementsByClassName("inputsTitle");
+  let innerField = document.getElementsByClassName("inputsField");
+
+  let titleDiv = document.createElement("div");
+  titleDiv.classList.add("form-group", "fonticonUpdate");
+  form.appendChild(titleDiv);
 
   let fieldDiv = document.createElement("div");
-  fieldDiv.classList.add("form-group", "fonticonUpdate");
+  fieldDiv.classList.add("form-group", "fonticon");
   form.appendChild(fieldDiv);
 
-  submutBtn.before(fieldDiv);
+  submitBtn.before(titleDiv);
+  submitBtn.before(fieldDiv);
 
-  let i = document.createElement("i");
-  i.classList.add("fas", "fa-comment", "fa-lg");
-  fieldDiv.appendChild(i);
+
+  let iTitle = document.createElement("i");
+  iTitle.classList.add("fas", "fa-list", "fa-lg");
+  titleDiv.appendChild(iTitle);
+
+  let iField = document.createElement("i");
+  iField.classList.add("fas", "fa-comment", "fa-lg");
+  fieldDiv.appendChild(iField);
+
 
   let label = document.createElement("label");
   label.classList.add("labelList");
-  label.innerHTML = stringifyNumber(innerTr.length) +" Text Field";
-  fieldDiv.appendChild(label);
+  label.innerHTML = stringifyNumber(innerTitle.length + 1) +" Text Field";
+  titleDiv.appendChild(label);
 
-  let input = document.createElement("input");
-  input.classList.add("form-control");
-  input.name = "fields";
-  input.placeholder = "Enter the " + stringifyNumber(innerTr.length)  + " Text Field";
-  fieldDiv.appendChild(input);
+  let inputTitle = document.createElement("input");
+  inputTitle.classList.add("form-control", "inputsTitle");
+  inputTitle.name = "field";
+  inputTitle.placeholder = "Enter the title " + stringifyNumber(innerTitle.length + 1)  + " Text Field";
+  titleDiv.appendChild(inputTitle);
+
+  let inputField = document.createElement("input");
+  inputField.classList.add("form-control", "inputsField");
+  inputField.name = "field";
+  inputField.placeholder = "Enter the " + stringifyNumber(innerField.length + 1)  + " Text Field";
+  fieldDiv.appendChild(inputField);
 }
 
 var special = ['zeroth','First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth'];

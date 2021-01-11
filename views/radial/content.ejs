@@ -17,7 +17,7 @@
                 <form method="POST" autocomplete="off">
                     <div class="form-group fonticonUpdate">
                         <i class="fab fa-elementor fa-lg"></i>
-                        <label for="titleTextField" class="labelList">Radial Menu Title</label>
+                        <label for="titleTextField" class="labelList">Title</label>
                         <input class="form-control" id="titleTextField" placeholder="Enter the Menu  Title"
                             value="<%= radial.title %>" name="title" required>
                     </div>    
@@ -25,12 +25,12 @@
                     <div class="form-group fonticonUpdate">
                         <i class="fas fa-comment fa-lg"></i>
                         <label for="firstTextField" class="labelList"><%= radial.fields[Number].title %></label>
-                        <textArea for="text" class="form-control textArea" name="fields" value=""><%= radial.fields[Number].text %></textArea>
+                        <textArea for="text" class="form-control textArea" name="fields" id="text-input"><%= radial.fields[Number].text %></textArea>
                     </div>
                         
                     <div class="divider"></div>
                     <button class="btn btn-primary submitButton" type="submit">
-                        <i class="fas fa-edit"></i> Speech</button>                    
+                        <i class="fas fa-edit"></i> Speak It</button>                    
                     
                     <a href="/radial-list" class="btn btn-warning cancelButton">
                         <i class="fas fa-undo"></i> Go Back</a>
@@ -40,6 +40,7 @@
         </div>
     </div>
 </div>
+<script src="/scripts/speech.js"></script>
     <!-- Include Defatul HTML Bottom -->
     <%- include ../partials/bottom_nav.ejs %>
     <!-- Include Defatul Footer -->

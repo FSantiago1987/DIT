@@ -1,8 +1,8 @@
 let mongoose = require('mongoose');
 
 let fieldModel = mongoose.Schema({
-    text: String,
-    title: String
+    title: String,
+    text: String
 });
 
 // create a model class
@@ -22,14 +22,7 @@ let radialModel = mongoose.Schema({
         type: String,
         default: ''
     },
-    /*
-    firstField: String,
-    secondField: String,
-    thirdField: String,
-    fourthField: String,
-    fifthField: String,
-    sixthField: String
-    */
+
     fields: [fieldModel],
 },
 {

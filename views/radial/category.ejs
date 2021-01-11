@@ -24,16 +24,16 @@
     <% if(RadialList.length == 0) { %>
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Radial Menus</h1>
-            <p class="lead text-muted">You don't have radial menus</p>
+            <h1 class="jumbotron-heading titleList">Sundials</h1>
+            <p class="lead text-muted">You don't have Sundials</p>
             <p>
                 <a href="/radial-list/add" class="btn btn-primary" role="button">
-                    <i class="fas fa-plus-circle"></i> Create Radial Menu</a>
+                    <i class="fas fa-plus-circle"></i> Create New Sundial</a>
             </p>
         </div>
     </section>
     <% } else { %>
-    <h1><%= title %></h1>
+    <h1 class="titleList"><%= title %></h1>
     <%if(messages == "User not found") {%>
     <div class="alert alert-danger">
         <%= messages %>
@@ -44,7 +44,7 @@
     </div>
     <% } %>
     <a href="/radial-list/add" class="btn btn-primary" role="button">
-        <i class="fas fa-plus-circle"></i>Add a Radial Menu</a>
+        <i class="fas fa-plus-circle"></i>Add a New Sundial</a>
     <br>
 
     <!-- Search box for titles -->
@@ -63,14 +63,14 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h3 class="card-text"><%= RadialList[count].title %></h3>
+                            <h3 class="card-text titleCard"><%= truncate(RadialList[count].title, 20)  %></h3>
                         </div>
                         <div>
                             <button type="button" class="btn btn-primary share-btn" data-toggle="modal" data-target="#shareModal" data-whatever="3" onclick="sendId('<%= RadialList[count]._id %>')" >Share</button>
                         </div>
                     </div>
                     <br>
-                    <p><%= RadialList[count].category %></p>
+                    <p class="categoryCard">Category: <%= capitalize(RadialList[count].category) %></p>
                     <table class="table table-borderless" id="table<%= btnId %>">
                         <tbody>
                         <% for(let countFields = 0; countFields < RadialList[count].fields.length; countFields++) { %>
@@ -87,16 +87,16 @@
                     </table>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" id="previous<%= btnId %>" class="PreviousBtn btn btn-sm btn-outline-primary" onclick="previous_click(this.id)" >
-                                <i class="fas fa-arrow-left"></i> Previous</button>
+                           <!-- <button type="button" id="previous<%= btnId %>" class="PreviousBtn btn btn-sm btn-outline-primary" onclick="previous_click(this.id)" >
+                                <i class="fas fa-arrow-left"></i> Previous</button> -->
                             <a href="/radial-list/edit/<%= RadialList[count]._id %>"><button type="button"
                                     class="btn btn-sm btn-outline-primary">
                                     <i class="fas fa-pencil-alt"></i> Edit</button></a>
                             <a href="/radial-list/delete/<%= RadialList[count]._id %>"><button type="button"
                                     class="btn btn-sm btn-outline-danger">
                                     <i class="fas fa-trash-alt"></i> Delete</button></a>
-                            <button type="button" id="next<%= btnId %>" class="nextBtn btn btn-sm btn-outline-primary" onclick="next_click(this.id)">
-                                <i class="fas fa-arrow-right"></i> Next</button>
+                            <!-- <button type="button" id="next<%= btnId %>" class="nextBtn btn btn-sm btn-outline-primary" onclick="next_click(this.id)">
+                                <i class="fas fa-arrow-right"></i> Next</button> -->
                         </div>
                         
                     </div>

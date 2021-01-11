@@ -1,7 +1,6 @@
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
-let say = require('say');
 
 // create a reference to the model
 let Radial = require('../models/radial_menu');
@@ -20,7 +19,7 @@ module.exports.displayRadialList = async (req, res, next) => {
 
 
         res.render('radial/list', {
-            title: 'Radial Menus', 
+            title: 'Sundials', 
             RadialList: radialList,
             UserID: userID.toString(),
             messages: req.flash('shareMessage'),
@@ -35,7 +34,7 @@ module.exports.displayRadialList = async (req, res, next) => {
 
 module.exports.displayAddPage = (req, res, next) => {
     let categories = req.user.categories;
-    res.render('radial/add', {title: 'Add Radial Menu', Categories: categories, displayName: req.user ? req.user.displayName: ''})          
+    res.render('radial/add', {title: 'Add New Sundial', Categories: categories, displayName: req.user ? req.user.displayName: ''})          
 }
 
 module.exports.processAddPage = async (req, res, next) => {
@@ -120,7 +119,7 @@ module.exports.displayEditPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('radial/edit', {title: 'Edit Radial', radial: radialToEdit, Categories: categories, displayName: req.user ? req.user.displayName: ''})
+            res.render('radial/edit', {title: 'Edit Sundial', radial: radialToEdit, Categories: categories, displayName: req.user ? req.user.displayName: ''})
         }
     });
 }
@@ -162,9 +161,9 @@ module.exports.processEditPage = async (req, res, next) => {
         "title": req.body.title,
         "privacy": req.body.privacy,
         "user": req.body.user,
-        "category": req.body.category
+        "category": req.body.category,
     });
-
+    console.log(updatedRadial);
     radial = Radial.findOneAndUpdate({_id: id}, updatedRadial, (err) => {
         if(err)
         {
@@ -237,7 +236,7 @@ module.exports.displayCategory = async (req, res, next) => {
         .lean()
 
         res.render('radial/category', {
-            title: 'Radial Menus',
+            title: 'Sundials',
             category: category,
             Categories: categories,
             messages: req.flash('shareMessage'),
@@ -298,14 +297,9 @@ module.exports.displayContentPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('radial/content', {title: 'Content Radial', radial: radialToDisplay, Number: number, displayName: req.user ? req.user.displayName: ''})
+            res.render('radial/content', {title: 'Sundial Content', radial: radialToDisplay, Number: number, displayName: req.user ? req.user.displayName: ''})
         }
     });
-}
-
-module.exports.processContentPage = (req, res) => {
-    let str = req.body.fields;
-    say.speak(str);
 }
 
 module.exports.performShare = (req, res, next) => {
