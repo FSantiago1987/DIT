@@ -58,17 +58,16 @@
                     <% for(let i = 0; i < radial.fields.length; i++) { %>
                         <div class="form-group fonticonUpdate">
                             <i class="fas fa-comment fa-list"></i>
-                            <label for="firstTextField" class="labelList">First Text Field</label>
+                            <label for="firstTextField" class="labelList"><%- stringifyNumber(i + 1) %> Text Field</label>
                             <input type="text" class="form-control inputsTitle" id="text"
                             placeholder="Enter the title First Text Field" name="titleField" value="<%= radial.fields[i].title %>" 
-                            name="title" required>
+                            name="title">
                         </div>
 
                         <div class="form-group fonticon">
                             <i class="fas fa-comment fa-lg"></i>
                             <input type="text" class="form-control" id="firstTextField"
-                            placeholder="Enter the first Text Field" value="<%= radial.fields[i].text %>" name="field"
-                            required>
+                            placeholder="Enter the first Text Field" value="<%= radial.fields[i].text %>" name="field">
                         </div>
                         
                     <% } %>

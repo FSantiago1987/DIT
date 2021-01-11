@@ -43,6 +43,7 @@ module.exports.processAddPage = async (req, res, next) => {
         let fieldsArr = req.body.field;
         let titlesArr = req.body.titleFields;
         let newRadial = await Radial.create(req.body);
+        console.log(req.body);
         for(let i = 0; i < fieldsArr.length; i++) {
             Radial.update({_id: newRadial._id},
                 { 
@@ -88,6 +89,7 @@ module.exports.processEditPage = async (req, res, next) => {
     let id = req.params.id;
     let fieldsArr = req.body.field;
     let titlesArr = req.body.titleField;
+
 
     let updatedRadial = Radial({
         "_id": id,
