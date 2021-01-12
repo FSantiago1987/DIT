@@ -379,6 +379,15 @@ input[type=submit] {
   }
 }
 
+.link-style {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+}
+
 @media screen and (max-width: 650px) {
 
   .sidenav {

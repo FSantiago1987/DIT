@@ -33,6 +33,7 @@ let GoogleUser = new mongoose.Schema
             type: Array,
             default: ['Family', 'News','Food']
         },
+        contacts:[],
         created:
         {
             type: Date,

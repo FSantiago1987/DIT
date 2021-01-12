@@ -42,4 +42,7 @@ router.get('/add-category/:newcat', authRequired, radialController.addCategory);
 /* GET to delete a Category - Delete Operation */
 router.get('/delete-category/:newcat', authRequired, radialController.deleteCategory);
 
+/* GET to delete a Contact - Delete Operation */
+router.get('/delete-contact/:contact', authRequired, radialController.deleteContact);
+
 module.exports = router;

@@ -135,6 +135,21 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <a id="share-link" href="/radial-list/share/id/email"><button onclick="getEmail()" type="button" class="btn btn-primary">Share</button></a>
         </div>
+        <div class="modal-footer"></div>
+        <div class="form-group">
+            <h5 class="modal-title">Contact List</h5>
+            <% let colorArr = ["#4285F4", "#DB4437", "#F4B400", "#0F9D58"]; %>
+            <% let pickColor = 0; %>
+            <% Contacts.sort(); %>
+            <% for(let count = 0; count < Contacts.length; count++) { %>
+                <i class="fas fa-id-badge" style="color:<%= colorArr[pickColor] %>"></i><button class="link-style" onclick="getContactValue(this)" value="<%= Contacts[count]  %>">&nbsp;<%= Contacts[count]  %></button>
+                <a href="/radial-list/delete-contact/<%= Contacts[count] %>" class="float-right"><i class="fas fa-times"></i></a><br>
+                <% pickColor = pickColor + 1; %>
+                <% if(pickColor == 4) { %>
+                    <% pickColor = 0; %>
+                <% } %>
+            <% } %>
+        </div>
         </div>
     </div>
     </div>

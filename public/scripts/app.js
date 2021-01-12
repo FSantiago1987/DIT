@@ -270,3 +270,9 @@ function getCategory() {
   catLink.href = catLink.href + "/" + category;
 }
 
+function getContactValue(objButton) {
+  let contact = objButton.value;
+  let emailInput = document.getElementById("recipient-email");
+  emailInput.value = contact;
+}
+

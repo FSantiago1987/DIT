@@ -13,6 +13,7 @@ module.exports.displayRadialList = async (req, res, next) => {
         let userID = req.user._id;
         let role = req.user.role;
         let categories = req.user.categories;
+        let contacts = req.user.contacts;
         let radialList = await Radial.find()
         .populate('users')
         .lean()
@@ -24,6 +25,7 @@ module.exports.displayRadialList = async (req, res, next) => {
             UserID: userID.toString(),
             messages: req.flash('shareMessage'),
             Categories: categories,
+            Contacts: contacts,
             Role: role,
             displayName: req.user ? req.user.displayName: ''
         });
@@ -255,7 +257,7 @@ module.exports.addCategory = (req, res, next) => {
     let newcat = req.params.newcat;
 
     User.updateOne({_id: userID}, { 
-        $push: {
+        $addToSet: {
             categories: newcat
         }
         }, (err) => {
@@ -305,6 +307,7 @@ module.exports.displayContentPage = (req, res, next) => {
 module.exports.performShare = (req, res, next) => {
     let id = req.params.id;
     let email = req.params.email;
+    let userID = req.user._id;
 
     User.findOne({"email": email}, (err, foundUser) => {
         if(err) 
@@ -322,7 +325,7 @@ module.exports.performShare = (req, res, next) => {
         {
             Radial.updateOne({_id: id},
                 { 
-                    $push: {
+                    $addToSet: {
                         shared_users: foundUser._id.toString()
                     }
                 }, (err) => {
@@ -331,11 +334,37 @@ module.exports.performShare = (req, res, next) => {
                     }
             });
 
+            User.updateOne({_id: userID}, { 
+                $addToSet: {
+                    contacts: email
+                }
+                }, (err) => {
+                    if(err) {
+                        console.log(err);
+                }
+            });
+
             req.flash('shareMessage', 'Shared successfully');
             return res.redirect('/radial-list');
         }
     });
- 
+}
+
+module.exports.deleteContact = (req, res, next) => {
+    let userID = req.user._id;
+    let contact = req.params.contact;
+
+    User.updateOne({_id: userID}, { 
+        $pull: {
+            contacts: contact
+        }
+        }, (err) => {
+            if(err) {
+                console.log(err);
+        }
+    });
+
+    res.redirect('/radial-list');
 }
 
 
