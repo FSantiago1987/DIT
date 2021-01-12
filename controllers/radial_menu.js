@@ -19,7 +19,7 @@ module.exports.displayRadialList = async (req, res, next) => {
 
 
         res.render('radial/list', {
-            title: 'Radial Menus', 
+            title: 'Sundials', 
             RadialList: radialList,
             UserID: userID.toString(),
             messages: req.flash('shareMessage'),
@@ -34,7 +34,7 @@ module.exports.displayRadialList = async (req, res, next) => {
 
 module.exports.displayAddPage = (req, res, next) => {
     let categories = req.user.categories;
-    res.render('radial/add', {title: 'Add Radial Menu', Categories: categories, displayName: req.user ? req.user.displayName: ''})          
+    res.render('radial/add', {title: 'Add New Sundial', Categories: categories, displayName: req.user ? req.user.displayName: ''})          
 }
 
 module.exports.processAddPage = async (req, res, next) => {
@@ -43,7 +43,7 @@ module.exports.processAddPage = async (req, res, next) => {
         let fieldsArr = req.body.field;
         let titlesArr = req.body.titleFields;
         let newRadial = await Radial.create(req.body);
-        console.log(req.body);
+        console.log(newRadial);
         for(let i = 0; i < fieldsArr.length; i++) {
             Radial.update({_id: newRadial._id},
                 { 
@@ -59,7 +59,6 @@ module.exports.processAddPage = async (req, res, next) => {
                     }
                 });
         }
-
         res.redirect('/radial-list');
     } catch (err) {
         console.log(err);
@@ -80,7 +79,7 @@ module.exports.displayEditPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('radial/edit', {title: 'Edit Radial', radial: radialToEdit, Categories: categories, displayName: req.user ? req.user.displayName: ''})
+            res.render('radial/edit', {title: 'Edit Sundial', radial: radialToEdit, Categories: categories, displayName: req.user ? req.user.displayName: ''})
         }
     });
 }
@@ -96,9 +95,9 @@ module.exports.processEditPage = async (req, res, next) => {
         "title": req.body.title,
         "privacy": req.body.privacy,
         "user": req.body.user,
-        "category": req.body.category
+        "category": req.body.category,
     });
-
+    console.log(updatedRadial);
     radial = Radial.findOneAndUpdate({_id: id}, updatedRadial, (err) => {
         if(err)
         {
@@ -123,7 +122,7 @@ module.exports.processEditPage = async (req, res, next) => {
                     });
             }
             
-            console.log(req.body);
+            
             // refresh the book list
             res.redirect('/radial-list');
         }
@@ -160,7 +159,7 @@ module.exports.displayCategory = async (req, res, next) => {
         .lean()
 
         res.render('radial/category', {
-            title: 'Radial Menus',
+            title: 'Sundials',
             category: category,
             Categories: categories,
             messages: req.flash('shareMessage'),

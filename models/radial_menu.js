@@ -1,8 +1,8 @@
 let mongoose = require('mongoose');
 
 let fieldModel = mongoose.Schema({
-    text: String,
-    title: String
+    title: String,
+    text: String
 });
 
 // create a model class

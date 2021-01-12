@@ -24,7 +24,7 @@
     <% if(RadialList.length == 0) { %>
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Sundials</h1>
+            <h1 class="jumbotron-heading titleList">Sundials</h1>
             <p class="lead text-muted">You don't have Sundials</p>
             <p>
                 <a href="/radial-list/add" class="btn btn-primary" role="button">
@@ -33,7 +33,7 @@
         </div>
     </section>
     <% } else { %>
-    <h1><%= title %></h1>
+    <h1 class="titleList"><%= title %></h1>
     <%if(messages == "User not found") {%>
     <div class="alert alert-danger">
         <%= messages %>
@@ -44,7 +44,7 @@
     </div>
     <% } %>
     <a href="/radial-list/add" class="btn btn-primary" role="button">
-        <i class="fas fa-plus-circle"></i>Add a Radial Menu</a>
+        <i class="fas fa-plus-circle"></i>Add a New Sundial</a>
     <br>
 
     <!-- Search box for titles -->
@@ -63,14 +63,14 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h3 class="card-text"><%= truncate(RadialList[count].title, 20)  %></h3>
+                            <h3 class="card-text titleCard"><%= truncate(RadialList[count].title, 20)  %></h3>
                         </div>
                         <div>
                             <button type="button" class="btn btn-primary share-btn" data-toggle="modal" data-target="#shareModal" data-whatever="3" onclick="sendId('<%= RadialList[count]._id %>')" >Share</button>
                         </div>
                     </div>
                     <br>
-                    <p>Category: <%= capitalize(RadialList[count].category) %></p>
+                    <p class="categoryCard">Category: <%= capitalize(RadialList[count].category) %></p>
                     <table class="table table-borderless" id="table<%= btnId %>">
                         <tbody>
                         <% for(let countFields = 0; countFields < RadialList[count].fields.length; countFields++) { %>

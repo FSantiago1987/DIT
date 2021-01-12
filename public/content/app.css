@@ -341,6 +341,20 @@ input[type=submit] {
   color: #064579;
 }
 
+.titleList {
+  color: #daf1ff!important;
+}
+
+.titleCard {
+  color: darkgoldenrod;
+  font-weight: 500;
+}
+
+.categoryCard {
+  color: #daa520;
+  font-weight: 400;
+}
+
 /* Hide category list on mobile device */
 @media only screen and (max-width: 600px) {
   .w3-sidebar {
