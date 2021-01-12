@@ -3,6 +3,23 @@
     function Start()
     {
         console.log("App Started...");
+
+        let deleteButtons = document.querySelectorAll('.cancel');
+
+        for (button of deleteButtons) {
+            button.addEventListener('click', (event) =>{
+              let blockDelete = false;
+              if(!blockDelete)
+              {
+                  blockDelete = true;
+                  if(!confirm("Are you sure?"))
+                  {
+                    event.preventDefault();
+                    window.location.assign('/radial-list');
+                  }
+              }
+            });
+        }
     }
 
     window.addEventListener("load", Start);
