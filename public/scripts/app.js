@@ -169,6 +169,7 @@ $(function(){
   }
 });
 
+/*
 function next_click(clicked_id) {
   let nonFields = 0;
   let tFields = 0;
@@ -214,7 +215,7 @@ function previous_click(clicked_id) {
     }
   }
 }
-
+*/
 
 function addElements() {
   let form = document.getElementById("addForm");
@@ -283,13 +284,21 @@ function getEmail() {
 
 function getCategory() {
   let category = document.getElementById("addCategory").value;
-  let catLink = document.getElementById("category-link");
-  catLink.href = catLink.href + "/" + category;
+  if(category == "") {
+    alert("Please enter category name first");
+    return;
+  }
+  let href = "/radial-list/add-category/" + category
+  window.location=href;
 }
 
 function getContactValue(objButton) {
   let contact = objButton.value;
   let emailInput = document.getElementById("recipient-email");
   emailInput.value = contact;
+}
+
+function checkCategory() {
+  alert(window.location.href);
 }
 

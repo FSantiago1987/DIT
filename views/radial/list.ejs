@@ -13,7 +13,7 @@
     <% } %>
     </ul>
     <br><input class="form-control mr-sm-2" id="addCategory" type="search" name="newcat" placeholder="New Category" aria-label="Search">
-    <a id="category-link" href="/radial-list/add-category"><button onclick="getCategory()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button></a>
+    <button onclick="getCategory()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button>
 </div>
 
 <!-- Main Content -->
@@ -34,8 +34,9 @@
             
             <p class="lead text-muted">You don't have Sundials</p>
             <p>
-                <a href="/radial-list/add" class="btn btn-primary" role="button">
-                    <i class="fas fa-plus-circle"></i> Create New Sundial</a>
+                    <a href="/radial-list/add/all" class="btn btn-primary" role="button">
+                        <i class="fas fa-plus-circle"></i>Add a New Sundial</a>
+                    <br>
             </p>
         </div>
     </section>
@@ -50,7 +51,7 @@
         <%= messages %>
     </div>
     <% } %>
-    <a href="/radial-list/add" class="btn btn-primary" role="button">
+    <a href="/radial-list/add/all" class="btn btn-primary" role="button">
         <i class="fas fa-plus-circle"></i>Add a New Sundial</a>
     <br>
     <!-- Search box for titles -->

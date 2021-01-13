@@ -36,15 +36,45 @@ module.exports.displayRadialList = async (req, res, next) => {
 
 module.exports.displayAddPage = (req, res, next) => {
     let categories = req.user.categories;
-    res.render('radial/add', {title: 'Add New Sundial', Categories: categories, displayName: req.user ? req.user.displayName: ''})          
+    let category = req.params.category;
+    res.render('radial/add', {title: 'Add New Sundial', Categories: categories, Category: category, displayName: req.user ? req.user.displayName: ''})          
 }
 
 module.exports.processAddPage = async (req, res, next) => {
     try {
+        // check if category exist, if not add it
+        let userID = req.user._id;
+        let category = req.params.category;
+        let enteredCategory = req.body.category;
+
+        if(enteredCategory.toLowerCase() != category) {
+            User.updateOne({_id: userID}, { 
+                $addToSet: {
+                    categories: enteredCategory
+            }
+                }, (err) => {
+                        if(err) {
+                            console.log(err);
+                }
+            });
+        }
+        
         req.body.user = req.user.id;
         let fieldsArr = req.body.field;
         let titlesArr = req.body.titleFields;
+
+        let objArr = []
+
+        for(let i = 0; i < titlesArr.length; i++) {
+            let newObj = {
+                "text": fieldsArr[i],
+                "title": titlesArr[i]
+            }
+
+            objArr.push(newObj);
+        }
         
+        /*
         let objArr = [
             {
                 "text": fieldsArr[0],
@@ -71,6 +101,7 @@ module.exports.processAddPage = async (req, res, next) => {
                 "title": titlesArr[5]
             }
         ]
+        */
 
         let newRadial = await Radial.create(req.body);
             Radial.update({_id: newRadial._id},

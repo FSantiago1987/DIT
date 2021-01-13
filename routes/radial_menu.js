@@ -13,10 +13,10 @@ let authRequired = require('../config/auth');
 router.get('/', authRequired, radialController.displayRadialList);
 
 /* GET Route for displaying the Add page - CREATE Operation */
-router.get('/add', authRequired, radialController.displayAddPage);
+router.get('/add/:category', authRequired, radialController.displayAddPage);
 
 /* POST Route for processing the Add page - CREATE Operation */
-router.post('/add', authRequired, radialController.processAddPage);
+router.post('/add/:category', authRequired, radialController.processAddPage);
 
 /* GET Route for displaying the Edit page - UPDATE Operation */
 router.get('/edit/:id', authRequired, radialController.displayEditPage);

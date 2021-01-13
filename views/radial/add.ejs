@@ -31,14 +31,26 @@
                         </select>
                     </div>
 
+                    
+                    
                     <div class="form-group fonticonUpdate">
-                        <label for="category" class="labelList">Category</label>
                         <i class="fas fa-layer-group fa-lg"></i>
-                        <select class="form-control mdb-select md-form selectList" id="category" name="category" required>
-                            <% for(let count = 0; count < Categories.length; count++) { %>
-                            <option value="<%= Categories[count] %>"><%= Categories[count] %></option>
+                        <label for="category" class="labelList">Category test</label>
+                        <% let categoryExist = false %>
+                        <% for(let count = 0; count < Categories.length; count++) { %>
+                            <% if (Categories[count].toLowerCase() == Category) { %>
+                                <input type="text" class="form-control" list="categories" name="category" value="<%= Categories[count] %>" required />
+                                <% categoryExist = true %>
                             <% } %>
-                        </select>
+                        <% } %>
+                        <% if (categoryExist == false) { %>
+                            <input type="text" class="form-control" name="category" list="categories" required />
+                        <% } %>
+                        <datalist id="categories">
+                            <% for(let count = 0; count < Categories.length; count++) { %>
+                                <option value="<%= Categories[count] %>"><%= Categories[count] %></option>
+                            <% } %>
+                        </datalist>
                     </div>
 
                     <div class="form-group fonticonUpdate">
