@@ -13,7 +13,7 @@
               if(!blockDelete)
               {
                   blockDelete = true;
-                  if(!confirm("Are you sure?"))
+                  if(!confirm("Are you sure you want to delete this item?"))
                   {
                     event.preventDefault();
                     //window.location.assign('/radial-list');

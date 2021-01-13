@@ -345,6 +345,10 @@ input[type=submit] {
   color: #daf1ff!important;
 }
 
+.sundial {
+  color: #daa520!important;
+}
+
 .titleCard {
   color: darkgoldenrod;
   font-weight: 500;
