@@ -3,9 +3,8 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a  href="/home"><i class="fas fa-home"></i> Home</a>
     <a class="nav-link" href="/radial-list"><i class="far fa-circle"></i> Sundials </a>
-    <a class="nav-link" href="/contact"><i class="fas fa-lg fa-mobile-alt"></i> Contact </a>
     <% if(typeof displayName == 'string' && displayName){ %>
-        <a href="/logout"><i class="fas fa-lg fa-sign-out-alt"></i> Logout</a></li>
+        <a href="/logout" class="logout"><i class="fas fa-lg fa-sign-out-alt"></i> Logout</a></li>
     <% } else { %>
         <a href="/login" class="nav-link"><i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
     <% } %>

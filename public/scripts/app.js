@@ -5,6 +5,7 @@
         console.log("App Started...");
 
         let deleteButtons = document.querySelectorAll('.cancel');
+        let logoutButtons = document.querySelectorAll('.logout');
 
         for (button of deleteButtons) {
             button.addEventListener('click', (event) =>{
@@ -15,12 +16,28 @@
                   if(!confirm("Are you sure?"))
                   {
                     event.preventDefault();
-                    window.location.assign('/radial-list');
+                    //window.location.assign('/radial-list');
                   }
               }
             });
+
+          }
+
+            for (button of logoutButtons) {
+              button.addEventListener('click', (event) =>{
+                let blockDelete = false;
+                if(!blockDelete)
+                {
+                    blockDelete = true;
+                    if(!confirm("Are you sure you want to logout?"))
+                    {
+                      event.preventDefault();
+                      //window.location.assign('/radial-list');
+                    }
+                }
+              });
+          }
         }
-    }
 
     window.addEventListener("load", Start);
 })();
