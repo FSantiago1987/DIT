@@ -8,7 +8,13 @@
   <h3 class="w3-bar-item">Category</h3>
     <ul class="list-group" id="category-list">
     <% for(let count = 0; count < Categories.length; count++) { %>
-        <a href="/radial-list/category/<%= Categories[count].toLowerCase() %>"><li class="list-group-item"><%= Categories[count] %><a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right cancel"><i class="fas fa-times"></i></a></li></a>
+        <a href="/radial-list/category/<%= Categories[count].toLowerCase() %>">
+            <li class="list-group-item"><%= Categories[count] %>
+                <a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right cancel">
+                    <i class="fas fa-times"></i>
+                </a>
+            </li>
+        </a>
     <% } %>
     </ul>
     <br><input class="form-control mr-sm-2" id="addCategory" type="search" name="newcat" placeholder="New Category" aria-label="Search">
@@ -29,7 +35,7 @@
     <% if(RadialList.length == 0 || empty == true) { %>
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading titleList">Sundials</h1>
+            <h1 class="jumbotron-heading titleList sundial">Sundials</h1>
             
             <p class="lead text-muted">You don't have Sundials</p>
             <p>
@@ -99,8 +105,8 @@
                             <a href="/radial-list/edit/<%= RadialList[count]._id %>"><button type="button"
                                     class="btn btn-sm btn-outline-primary">
                                     <i class="fas fa-pencil-alt"></i> Edit</button></a>
-                            <a href="/radial-list/delete/<%= RadialList[count]._id %>"><button type="button"
-                                    class="btn btn-sm btn-outline-danger cancel">
+                            <a href="/radial-list/delete/<%= RadialList[count]._id %>" class="cancel"><button type="button"
+                                    class="btn btn-sm btn-outline-danger">
                                     <i class="fas fa-trash-alt"></i> Delete</button></a>
                             <!-- <button type="button" id="next<%= btnId %>" class="nextBtn btn btn-sm btn-outline-primary" onclick="next_click(this.id)">
                                 <i class="fas fa-arrow-right"></i> Next</button> -->
