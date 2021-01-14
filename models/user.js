@@ -43,7 +43,7 @@ let User = mongoose.Schema
         categories:
         {
             type: Array,
-            default: ['Family', 'News','Food']
+            default: ['Family', 'News','Food', 'Shared Sundials']
         },
         contacts:[],
         created:

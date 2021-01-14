@@ -4,29 +4,40 @@
 <%- include ../partials/main_nav.ejs %>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
+<div id="left-sidebar" class="w3-sidebar w3-light-grey w3-bar-block overflow-auto" style="width:12%">
   <h3 class="w3-bar-item">Category</h3>
-    <ul class="list-group" id="category-list">
+    <table class="table">
+    <tbody>
     <% for(let count = 0; count < Categories.length; count++) { %>
-        <a href="/radial-list/category/<%= Categories[count].toLowerCase() %>">
-            <li class="list-group-item"><%= Categories[count] %>
-                <a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right cancel">
-                    <i class="fas fa-times"></i>
-                </a>
-            </li>
-        </a>
+        <% if(Categories[count] == "Shared Sundials") { %>
+            <% continue; %>
+        <% } else { %>
+            <tr>
+            <td><a href="/radial-list/category/<%= Categories[count].toLowerCase() %>"><%= Categories[count] %></a></td>
+            <td><a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right cancel">
+                <i class="fas fa-times"></i></a></td>
+            	</tr>
+        <% } %>
     <% } %>
-    </ul>
+        <tr>
+            <td><a href="/radial-list/category/shared sundials %>">Shared Sundials</a></td>
+            <td></td>
+        </tr>
+    </tbody>
+    </table>
+    
     <br><input class="form-control mr-sm-2" id="addCategory" type="search" name="newcat" placeholder="New Category" aria-label="Search">
     <button onclick="getCategory()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button>
 </div>
+
+
 
 <!-- Main Content -->
 
 <main class="container">
     <% let empty = true %>
     <% for(let count = 0; count < RadialList.length; count++) { %>
-        <% if(RadialList[count].user == UserID || RadialList[count].shared_users.includes(UserID)) { %>
+        <% if(RadialList[count].user == UserID) { %>
             <% empty = false %>
             <% break %>
         <% } %>
@@ -70,7 +81,7 @@
     <div class="row" id="menusDiv">
         <% for(let count = 0; count < RadialList.length; count++) { %>
         <% btnId = count; %>
-        <% if((Role == 'Caregiver' && RadialList[count].privacy == 'Public') || (RadialList[count].user == UserID || RadialList[count].shared_users.includes(UserID))) { %>
+        <% if((Role == 'Caregiver' && RadialList[count].privacy == 'Public') || RadialList[count].user == UserID) { %>
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
@@ -113,7 +124,9 @@
                         </div>
                         
                     </div>
-                    <small class="text-muted"></small>
+                    <% if(RadialList[count].from != null) { %>
+                    <small class="text-muted"> Made by: <%= RadialList[count].from %></small>
+                    <% } %>
                 </div>
             </div>
         </div>

@@ -10,6 +10,12 @@ body {
   background-size: cover;
 }
 
+/*
+.container {
+  width: 75%;
+}
+*/
+
 footer {
     padding-top: 80px;
 }
@@ -359,6 +365,12 @@ input[type=submit] {
   font-weight: 400;
 }
 
+#left-sidebar {
+  overflow-y: hidden;
+  height: 79vh;
+  padding-bottom: 20px;
+}
+
 /* Hide category list on mobile device */
 @media only screen and (max-width: 600px) {
   .w3-sidebar {
@@ -391,6 +403,8 @@ input[type=submit] {
   cursor: pointer;
   color: white;
 }
+
+
 
 @media screen and (max-width: 650px) {
 

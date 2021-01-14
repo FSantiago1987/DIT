@@ -17,7 +17,7 @@ let radialModel = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     },
-    shared_users:[],
+    from: String,
     category: {
         type: String,
         default: ''

@@ -5,18 +5,42 @@
 <script src="/scripts/app.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
+<div id="left-sidebar" class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
     <h3 class="w3-bar-item">Category</h3>
-    <ul class="list-group">
+    <table class="table">
+    <tbody>
         <% for(let count = 0; count < Categories.length; count++) { %>
-            <% if(category == Categories[count].toLowerCase()) { %>
-                <a href="/radial-list/category/<%= Categories[count].toLowerCase() %>"><li class="list-group-item active" aria-current="true"><%= Categories[count] %><a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right cancel"><i class="fas fa-times"></i></a></li></a>
-            <% } else { %>
-                <a href="/radial-list/category/<%= Categories[count].toLowerCase() %>"><li class="list-group-item"><%= Categories[count] %><a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right cancel"><i class="fas fa-times"></i></a></li></a>
+            <% if(category == Categories[count].toLowerCase() && category != "shared sundials") { %>
+            <tr>
+                <td style="background-color: #1E90FF"><a style="color: white" href="/radial-list/category/<%= Categories[count].toLowerCase() %>"><%= Categories[count] %></a></td>
+                <td style="background-color: #1E90FF;"><a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right cancel">
+                    <i class="fas fa-times"></i></a></td>
+            </tr>
+            <% } else if(Categories[count].toLowerCase() != "shared sundials") { %>
+            <tr>
+                <td><a href="/radial-list/category/<%= Categories[count].toLowerCase() %>"><%= Categories[count] %></a></td>
+                <td><a href="/radial-list/delete-category/<%= Categories[count] %>" class="btn btn-danger btn-sm float-right cancel">
+                    <i class="fas fa-times"></i></a></td>
+            </tr>
             <% } %>
         <% } %>
-        <a href="/radial-list"><li class="list-group-item">All</li></a>
-    </ul>
+        <% if(category == "shared sundials") { %>
+            <tr>
+                <td style="background-color: #1E90FF"><a style="color: white" href="/radial-list/category/shared sundials %>">Shared Sundials</a></td>
+                <td style="background-color: #1E90FF;"></td>
+            </tr>
+        <% } else { %>
+            <tr>
+                <td><a href="/radial-list/category/shared sundials %>">Shared Sundials</a></td>
+                <td></td>
+            </tr>
+        <% } %>
+        <tr>
+                <td><a href="/radial-list">All</a></td>
+                <td></td>
+        </tr>
+    </tbody>
+    </table>
 </div>
 
 <!-- Main Content -->
@@ -100,7 +124,9 @@
                         </div>
                         
                     </div>
-                    <small class="text-muted"></small>
+                    <% if(RadialList[count].from != null) { %>
+                    <small class="text-muted"> Made by: <%= RadialList[count].from %></small>
+                    <% } %>
                 </div>
             </div>
         </div>

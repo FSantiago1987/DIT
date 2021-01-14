@@ -73,35 +73,6 @@ module.exports.processAddPage = async (req, res, next) => {
 
             objArr.push(newObj);
         }
-        
-        /*
-        let objArr = [
-            {
-                "text": fieldsArr[0],
-                "title": titlesArr[0]
-            },
-            {
-                "text": fieldsArr[1],
-                "title": titlesArr[1]
-            },
-            {
-                "text": fieldsArr[2],
-                "title": titlesArr[2]
-            },
-            {
-                "text": fieldsArr[3],
-                "title": titlesArr[3]
-            },
-            {
-                "text": fieldsArr[4],
-                "title": titlesArr[4]
-            },
-            {
-                "text": fieldsArr[5],
-                "title": titlesArr[5]
-            }
-        ]
-        */
 
         let newRadial = await Radial.create(req.body);
             Radial.update({_id: newRadial._id},
@@ -114,24 +85,7 @@ module.exports.processAddPage = async (req, res, next) => {
                         console.log(err);
                     }
                 });
-        
-        /*
-        for(let i = 0; i < fieldsArr.length; i++) {
-            Radial.update({_id: newRadial._id},
-                { 
-                    $push: {
-                        fields: [{
-                            "text": fieldsArr[i],
-                            "title": titlesArr[i],
-                        }] 
-                    }
-                }, (err) => {
-                    if(err) {
-                        console.log(err);
-                    }
-                });
-        }
-        */
+       
         res.redirect('/radial-list');
     } catch (err) {
         console.log(err);
@@ -215,23 +169,7 @@ module.exports.processEditPage = async (req, res, next) => {
                         console.log(err);
                     }
                 });
-            /*
-            for(let i = 0; i < fieldsArr.length; i++) {
-                Radial.update({_id: id},
-                    { 
-                        $push: {
-                            fields: [{
-                                "text": fieldsArr[i],
-                                "title": titlesArr[i],
-                            }] 
-                        }
-                    }, (err) => {
-                        if(err) {
-                            console.log(err);
-                        }
-                    });
-            }
-            */
+            
             console.log(req.body);
             // refresh the book list
             res.redirect('/radial-list');
@@ -354,29 +292,38 @@ module.exports.performShare = (req, res, next) => {
         }
         else
         {
-            Radial.updateOne({_id: id},
-                { 
-                    $addToSet: {
-                        shared_users: foundUser._id.toString()
-                    }
-                }, (err) => {
-                    if(err) {
-                        console.log(err);
-                    }
-            });
-
-            User.updateOne({_id: userID}, { 
-                $addToSet: {
-                    contacts: email
+            Radial.findById(id, (err, radialToShare) => {
+                if(err)
+                {
+                    console.log(err);
+                    res.end(err);
                 }
-                }, (err) => {
-                    if(err) {
-                        console.log(err);
+                else
+                {
+                    let newRadial = ({
+                        "title": radialToShare.title,
+                        "privacy": radialToShare.privacy,
+                        "user": foundUser._id,
+                        "from": req.user.displayName,
+                        "category": "Shared Sundials",
+                        "fields": radialToShare.fields
+                    })
+                    Radial.create(newRadial);
+
+                    User.updateOne({_id: userID}, { 
+                        $addToSet: {
+                            contacts: email
+                        }
+                        }, (err) => {
+                            if(err) {
+                                console.log(err);
+                        }
+                    });
+
+                    req.flash('shareMessage', 'Shared successfully');
+                    return res.redirect('/radial-list');
                 }
             });
-
-            req.flash('shareMessage', 'Shared successfully');
-            return res.redirect('/radial-list');
         }
     });
 }
