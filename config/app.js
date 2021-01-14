@@ -3,10 +3,11 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-let say = require('say');
+
 
 // modules for authentication
 let session = require('express-session');
+let MongoStore = require('connect-mongo')(session);
 let passport = require('passport');
 let passportLocal = require('passport-local');
 let localStrategy = passportLocal.Strategy;
@@ -46,11 +47,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../node_modules')));
 
+let oneHour = 3600000
+
 // setup express session
 app.use(session({
   secret: "someSecret",
   saveUninitialized: false,
-  resave: false
+  resave: false,
+  store: new MongoStore({ 
+    mongooseConnection: mongoose.connection,
+    ttl: 20 * 60, // expires in 20 min
+    autoRemove: 'interval',
+    autoRemoveInterval: 2 
+  }),
 }));
 
 // initialize flash
