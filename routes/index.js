@@ -10,6 +10,12 @@ router.get('/', indexController.displayHomePage);
 /* GET home page. */
 router.get('/home', indexController.displayHomePage);
 
+/* GET Contact page. */
+router.get('/contact', indexController.displayContactPage);
+
+/* GET Help page. */
+router.get('/help', indexController.displayHelpPage);
+
 /* GET Route for displaying the Login Page */
 router.get('/login', authController.displayLoginPage);
 
