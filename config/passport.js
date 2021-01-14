@@ -12,6 +12,7 @@ module.exports = function(passport) {
         clientSecret: DB.GOOGLE_SECRET,
         callbackURL: '/auth/google/callback'        
     }, async (accessToken, refreshToken, profile, done) => {
+        console.log(profile);
         let newUser = {
             username: profile.id,
             email: profile.emails[0].value,

@@ -5,7 +5,7 @@
 <script src="/scripts/app.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%">
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:12%;">
     <h3 class="w3-bar-item">Category</h3>
     <ul class="list-group">
         <% for(let count = 0; count < Categories.length; count++) { %>
@@ -20,11 +20,11 @@
 </div>
 
 <!-- Main Content -->
-<main class="container">
+<main class="container" style="margin-left:200px;">
     <% if(RadialList.length == 0) { %>
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading titleList">Sundials</h1>
+            <h1 class="jumbotron-heading titleList sundial">Sundials</h1>
             <p class="lead text-muted">You don't have Sundials</p>
             <p>
                 <a href="/radial-list/add/<%= category %>" class="btn btn-primary" role="button">
