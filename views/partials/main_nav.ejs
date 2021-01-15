@@ -1,10 +1,13 @@
 <!-- set active item on navigation bar based on the current page -->
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a  href="/home"><i class="fas fa-home"></i> Home</a>
-    <a class="nav-link" href="/radial-list"><i class="far fa-circle"></i> Sundials </a>
+    <a class="nav-link"  href="/home"><i class="fas fa-lg fa-home"></i> Home</a>
+    <a class="nav-link" href="/radial-list"><i class="far fa-lg fa-circle"></i> Sundials</a>
+    <a class="nav-link" href="/contact"><i class="fas fa-lg fa-mobile-alt"></i> Contact</a>
+    <a class="nav-link" href="/help"><i class="fas fa-lg fa-question-circle"></i> Help</a>
     <% if(typeof displayName == 'string' && displayName){ %>
-        <a href="/logout" class="logout"><i class="fas fa-lg fa-sign-out-alt"></i> Logout</a></li>
+        <!--<a class="nav-link" href="/contact"><i class="fas fa-lg fa-mobile-alt"></i> Change Profile </a>-->
+        <a href="/logout" class="nav-link logout"><i class="fas fa-lg fa-sign-out-alt"></i> Logout</a></li>
     <% } else { %>
         <a href="/login" class="nav-link"><i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
     <% } %>
