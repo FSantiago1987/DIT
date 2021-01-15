@@ -376,6 +376,14 @@ input[type=submit] {
   padding-bottom: 20px;
 }
 
+.white-color {
+  color: white;
+}
+
+.white-color:hover {
+  color: white;
+}
+
 /* Hide category list on mobile device */
 @media only screen and (max-width: 600px) {
   .w3-sidebar {

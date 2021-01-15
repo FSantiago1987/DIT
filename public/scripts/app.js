@@ -319,3 +319,7 @@ function checkCategory() {
   alert(window.location.href);
 }
 
+function forgotPassword() {
+  let forgotDiv = document.getElementById("forgotDiv");
+  forgotDiv.innerHTML = "Please contact us via e-mail: <span class='white-color'>info@gnomontalk.com</span>"
+}

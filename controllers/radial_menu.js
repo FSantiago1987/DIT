@@ -7,6 +7,7 @@ let Radial = require('../models/radial_menu');
 let userModel = require('../models/user');
 let User = userModel.User;
 
+// display list.ejs page
 module.exports.displayRadialList = async (req, res, next) => {
     try 
     {
@@ -34,19 +35,21 @@ module.exports.displayRadialList = async (req, res, next) => {
     }
 }
 
+// display add.ejs page
 module.exports.displayAddPage = (req, res, next) => {
     let categories = req.user.categories;
     let category = req.params.category;
     res.render('radial/add', {title: 'Add New Sundial', Categories: categories, Category: category, displayName: req.user ? req.user.displayName: ''})          
 }
 
+// post add.ejs page
 module.exports.processAddPage = async (req, res, next) => {
     try {
         // check if category exist, if not add it
         let userID = req.user._id;
         let category = req.params.category;
         let enteredCategory = req.body.category;
-
+        
         if(enteredCategory.toLowerCase() != category) {
             User.updateOne({_id: userID}, { 
                 $addToSet: {
@@ -59,6 +62,7 @@ module.exports.processAddPage = async (req, res, next) => {
             });
         }
         
+        // create a sundial with all the filled fields 
         req.body.user = req.user.id;
         let fieldsArr = req.body.field;
         let titlesArr = req.body.titleFields;
@@ -93,10 +97,12 @@ module.exports.processAddPage = async (req, res, next) => {
     }   
 }
 
+// display edit.ejs page
 module.exports.displayEditPage = (req, res, next) => {
     let id = req.params.id;
     let categories = req.user.categories;
 
+    // find sundial by id and show it
     Radial.findById(id, (err, radialToEdit) => {
         if(err)
         {
@@ -111,11 +117,13 @@ module.exports.displayEditPage = (req, res, next) => {
     });
 }
 
+// post edit.ejs page
 module.exports.processEditPage = async (req, res, next) => {
     let id = req.params.id;
     let fieldsArr = req.body.field;
     let titlesArr = req.body.titleField;
 
+    // array of object from fields entered by user
     let objArr = [
         {
             "text": fieldsArr[0],
@@ -143,6 +151,7 @@ module.exports.processEditPage = async (req, res, next) => {
         }
     ]
 
+    // save updated sundial inside a variable
     let updatedRadial = Radial({
         "_id": id,
         "title": req.body.title,
@@ -150,7 +159,9 @@ module.exports.processEditPage = async (req, res, next) => {
         "user": req.body.user,
         "category": req.body.category,
     });
-    console.log(updatedRadial);
+    
+    // find sundial by id and replace it with updated one,
+    // then push obj array into updated radial
     radial = Radial.findOneAndUpdate({_id: id}, updatedRadial, (err) => {
         if(err)
         {
@@ -177,6 +188,7 @@ module.exports.processEditPage = async (req, res, next) => {
     });
 }
 
+// delete sundial
 module.exports.performDelete = (req, res, next) => {
     let id = req.params.id;
 
@@ -194,6 +206,8 @@ module.exports.performDelete = (req, res, next) => {
     });
 }
 
+// display category.ejs page
+// similar to display list.ejs
 module.exports.displayCategory = async (req, res, next) => {
     let category = req.params.category;
     
@@ -221,6 +235,7 @@ module.exports.displayCategory = async (req, res, next) => {
     }
 }
 
+// adds a new category to the user
 module.exports.addCategory = (req, res, next) => {
     let userID = req.user._id;
     let newcat = req.params.newcat;
@@ -238,6 +253,7 @@ module.exports.addCategory = (req, res, next) => {
     res.redirect('/radial-list');
 }
 
+// delete a category
 module.exports.deleteCategory = (req, res, next) => {
     let userID = req.user._id;
     let newcat = req.params.newcat;
@@ -255,6 +271,7 @@ module.exports.deleteCategory = (req, res, next) => {
     res.redirect('/radial-list');
 }
 
+// display content.ejs
 module.exports.displayContentPage = (req, res, next) => {
     let id = req.params.id;
     let number = parseInt(req.params.number);
@@ -273,11 +290,13 @@ module.exports.displayContentPage = (req, res, next) => {
     });
 }
 
+// perform share
 module.exports.performShare = (req, res, next) => {
     let id = req.params.id;
     let email = req.params.email;
     let userID = req.user._id;
 
+    // find recipient user by email
     User.findOne({"email": email}, (err, foundUser) => {
         if(err) 
         {
@@ -285,6 +304,7 @@ module.exports.performShare = (req, res, next) => {
             res.end(err);
             
         }
+        // if user email is not registered
         else if(foundUser == null) 
         {
             req.flash('shareMessage', 'User not found');
@@ -292,6 +312,7 @@ module.exports.performShare = (req, res, next) => {
         }
         else
         {
+            // if everything fine, find sundial that user want to share
             Radial.findById(id, (err, radialToShare) => {
                 if(err)
                 {
@@ -300,6 +321,8 @@ module.exports.performShare = (req, res, next) => {
                 }
                 else
                 {
+                    //  save new sundial inside a variable, and fill it with found sundial information
+                    // changin only category and adding from field
                     let newRadial = ({
                         "title": radialToShare.title,
                         "privacy": radialToShare.privacy,
@@ -310,6 +333,7 @@ module.exports.performShare = (req, res, next) => {
                     })
                     Radial.create(newRadial);
 
+                    // update contact list of user with recipient email
                     User.updateOne({_id: userID}, { 
                         $addToSet: {
                             contacts: email
@@ -328,6 +352,7 @@ module.exports.performShare = (req, res, next) => {
     });
 }
 
+// delete a contact
 module.exports.deleteContact = (req, res, next) => {
     let userID = req.user._id;
     let contact = req.params.contact;
