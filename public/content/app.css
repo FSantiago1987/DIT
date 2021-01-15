@@ -16,6 +16,7 @@ body {
 }
 */
 
+
 footer {
     padding-top: 80px;
 }
@@ -162,6 +163,10 @@ padding-left: 54px;
   padding-bottom: 10px;
   padding-right: 10px;
   height: 200px!important;
+}
+
+.contact-fields input{
+  border: 1px solid #ced4da;
 }
 
 .fonticon
