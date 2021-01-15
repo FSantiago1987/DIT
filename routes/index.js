@@ -31,4 +31,8 @@ router.post('/register', authController.processRegisterPage);
 /* GET Route to perform UserLogout */
 router.get('/logout', authController.performLogout);
 
+/* GET Route to perform Forgot Password Message */
+router.get('/forgot-password', authController.displayForgotPassword);
+
+
 module.exports = router;

@@ -47,7 +47,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../node_modules')));
 
-let oneHour = 3600000
 
 // setup express session
 app.use(session({

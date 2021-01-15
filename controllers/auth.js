@@ -51,6 +51,15 @@ module.exports.processLoginPage = (req, res, next) => {
     })(req, res, next);
 }
 
+
+module.exports.displayForgotPassword = (req, res, next) => {
+    req.flash(
+        'loginMessage',
+        'If you are having trouble to connect or forgot your password. Please contact: info@gnomontalk.com'
+    );
+    return res.redirect('/login');
+}
+
 module.exports.displayRegisterPage = (req,res, next) => {
     if(!req.user)
     {
@@ -74,7 +83,6 @@ module.exports.processRegisterPage = (req,res, next) => {
             'registerMessage',
             'Registration Error: Password must have at least 7 characters'
         );
-        console.log('Error: Password must have at least 7 characters');
         return res.render('auth/register', {
             title: 'Register',
             messages: req.flash('registerMessage'),
