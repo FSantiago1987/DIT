@@ -420,6 +420,18 @@ input[type=submit] {
     font-size: 15px!important;
   }
 
+  .sundialMain {
+    margin-left: 0!important;
+  }
+
+  .pics {
+    height: 200px!important;
+  }
+
+  .pics2 {
+    height: 130px!important;
+  }
+
   .logo {
     height: 70px!important;
     width: 80px!important;
