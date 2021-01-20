@@ -2,9 +2,7 @@ module.exports =
 {
     //"URI": "mongodb://localhost/DIT",
     //Use your own mongodb serve link
-    "URI": "Your mongodb link goes in here example:mongodb+srv://example:Sw7wOIxSDASD2D30@mongodbserver.7zlzn.azure.mongodb.net/DIT?retryWrites=true&w=majority",
-    //Use your own google_id
-    "GOOGLE_ID": " Your google_id goes in here example:sadasdasdaw213213123dasd213da.apps.googleusercontent.com",
-    //Use your own google secret
-    "GOOGLE_SECRET": "Your google secret goes in here example:idLVSSDAaSvCDAWRKb"
+    "URI": "mongodb+srv://fabio:Sw7wOIxUiR9Y6PD0@mongodbserver.7zlzn.azure.mongodb.net/DIT?retryWrites=true&w=majority",
+    "GOOGLE_ID": "857431632237-kjk6li4gb5von121hvj0sl627cr90lsq.apps.googleusercontent.com",
+    "GOOGLE_SECRET": "jN9NI934-aGiaBFD2zBDdx3W"
 }
