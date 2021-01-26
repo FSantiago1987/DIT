@@ -2,7 +2,7 @@ module.exports =
 {
     //"URI": "mongodb://localhost/DIT",
     //Use your own mongodb serve link
-    "URI": "mongodb+srv://admin:a1njPXnTmp6BIMPW@cluster0.zar71.mongodb.net/DIT?retryWrites=true&w=majority",
-    "GOOGLE_ID": "217458547862-m5s44lb22eic85udo1k27a9kj0kdlpib.apps.googleusercontent.com",
-    "GOOGLE_SECRET": "mK_OZBRn9rOGCmoCcZZyVJIU"
+    "URI": "mongodb+srv://fabio:Sw7wOIxUiR9Y6PD0@mongodbserver.7zlzn.azure.mongodb.net/DIT?retryWrites=true&w=majority",
+    "GOOGLE_ID": "153013525043-vrdof7uv2r1f8vmnl256aeb0icho5qvg.apps.googleusercontent.com",
+    "GOOGLE_SECRET": "idLVStN6bK1IXKbRm1VH4TKb"
 }
